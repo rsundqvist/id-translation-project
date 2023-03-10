@@ -1,0 +1,1 @@
+This subfolder may be used to "park" fetching configurations that are not needed but should not be removed (yet).
