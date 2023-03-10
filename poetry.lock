@@ -221,14 +221,14 @@ requests = ">=2.23.0"
 
 [[package]]
 name = "directory-tree"
-version = "0.0.2"
+version = "0.0.3"
 description = "Utility Package that displays out the Tree Structure of a Particular Directory."
 category = "dev"
 optional = false
 python-versions = "*"
 files = [
-    {file = "directory_tree-0.0.2-py3-none-any.whl", hash = "sha256:2d67cf4fd9394b2a8dd30d2be074afc51ac61c5bd121b3bf91803e08b4fb6a3d"},
-    {file = "directory_tree-0.0.2.tar.gz", hash = "sha256:9da96fbdeb0e375c47012901b9e4c1fac4e960c5a9123626fd25074d4d03626d"},
+    {file = "directory_tree-0.0.3-py3-none-any.whl", hash = "sha256:10abcd7fe51eaf7ba3aeb0fadead26adad931a99602cb806d4e888c7c6e30a4f"},
+    {file = "directory_tree-0.0.3.tar.gz", hash = "sha256:23e9ac8923613db3921c9f990280b0c345ad97dcf0477949505af9f92e32288a"},
 ]
 
 [package.extras]
@@ -551,4 +551,4 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "be60015228708b0dc10b5c2fae0d4a4139cb50dd897afe248ce2a5a66d1f65a7"
+content-hash = "1b79d612ede277b06243678ee6a16bc29dccd93c51a5f95e1d1fadc407e965b3"
