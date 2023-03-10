@@ -1,0 +1,78 @@
+# Uncomment to use custom implementation
+# [fetching.'{{cookiecutter.namespace}}.id_translation.customization.CustomSqlFetcher']
+[fetching.SqlFetcher]
+# ------------------------------------------------------------------------------
+# Implementation-specific configuration. All available arguments to the
+# AbstractFetcher and SqlFetcher-classes may be used here, except 'mapper' (see
+# subsection [fetching.mapping]).
+#
+# https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.fetching.html#id_translation.fetching.SqlFetcher
+#
+connection_string = "postgresql+pg8000://postgres:Sofia123!@localhost:5002/sakila"
+# password = "<very-secret-password>"  # Replaces '{password}' in the connection string, if present.
+# password = "<password-key>" # For use with the CustomSqlFetcher that reads password from AWS secrets storage.
+
+# engine_kwargs.fast_executemany = true  # Not supported by all drivers
+
+# Keep only one list-table, or neither for full access. This config is chosen to work with the templated test cases.
+# blacklist_tables = []
+whitelist_tables = ["address", "city", "country", "language"]  # Create artifical "need" for two fetching configs.
+include_views = false  # This is the default
+
+# ------------------------------------------------------------------------------
+# AbstractFetcher configuration.
+#
+# https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.fetching.html#id_translation.fetching.AbstractFetcher
+selective_fetch_all = true
+fetch_all_cache_max_age = "30d"  # Enable caching; geography rarely changes.
+
+# ------------------------------------------------------------------------------
+# Placeholder mapping configuration. Binds actual names in sources (such as
+# column names in an SQL table) to wanted names, eg id = 'animal_id'.
+#
+# Vocabulary:
+#       value: A placeholder to match to a column name.
+#   candidate: The name of a column in a table.
+#     context: The name of the current table (the 'source').
+#
+# https://rics.readthedocs.io/en/stable/documentation/mapping-primer.html
+# https://rics.readthedocs.io/en/stable/_autosummary/rics.mapping.html
+#
+[fetching.mapping]
+unmapped_values_action = "raise"  # Logs on the DEBUG level
+score_function = "modified_hamming"
+verbose_logging = true  # Ignored unless rics.mapping.* log level = DEBUG
+
+# ------------------------------------------------------------------------------
+# https://rics.readthedocs.io/en/stable/_autosummary/rics.mapping.filter_functions.html
+[[fetching.mapping.filter_functions]]  # Avoid tables that contain banned keywords.
+function = "banned_substring"
+substrings = ["previous_", "old_"]
+where = "context"  # Table name may not contain 'previous_' or 'old_'
+[[fetching.mapping.filter_functions]]  # No safety incidents please!
+function = "banned_substring"
+substrings = ["password", "hash"]
+where = "candidate"  # Column name may not contain 'password' or 'hash'
+
+# ------------------------------------------------------------------------------
+# https://rics.readthedocs.io/en/stable/_autosummary/rics.mapping.heuristic_functions.html
+# Set mutate=true to keep the new value and candidate names until mapping is complete.
+[[fetching.mapping.score_function_heuristics]]  # For tables with a prefix, e.g. first_animals instead of just animals
+function = "value_fstring_alias"
+fstring = "first_{value}"
+[[fetching.mapping.score_function_heuristics]] # Handle smurf naming, e.g. column 'animal_id' in table 'animals'
+function = "value_fstring_alias"
+fstring = "{context}_{value}"
+[[fetching.mapping.score_function_heuristics]] # Name column is table name, e.g. 'animals.animal' instead if 'animals.name'.
+function = "value_fstring_alias"
+fstring = "{context}"
+for_value = "name"  # Required since {name} is not in the fstring
+[[fetching.mapping.score_function_heuristics]]
+function = "like_database_table"
+
+# ------------------------------------------------------------------------------
+# For mappings that are difficult or impossible to resolve using scoring logic.
+[fetching.mapping.overrides]  # Shared overrides used for all tables
+wanted_column = "some_column"
+[fetching.mapping.overrides.table_name]  # Overrides for 'table_name' only.
+wanted_column = "another_column"

@@ -1,0 +1,11 @@
+{
+  "cookiecutter": {
+    "full_name": "Richard Sundqvist",
+    "email": "richard.sundqvist@live.se",
+    "organization": "Unit Testing Enthusiasts, Inc.",
+    "namespace": "ute",
+    "project_slug": "ute-id-translation",
+    "rics_version": "\"*\"",
+    "id_translation_version": "\"*\""
+  }
+}

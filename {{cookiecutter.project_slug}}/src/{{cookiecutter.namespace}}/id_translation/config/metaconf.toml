@@ -1,0 +1,11 @@
+# Metaconfguration file.
+#
+# Determines how other files are interpreted by the TOML factory. This file is
+# always read as-is, without any interpolation or similar.
+#
+# For help, see https://id-translation.readthedocs.io/en/stable/documentation/translator-config.html
+#
+[env]
+allow_interpolation = true
+allow_nested = true
+allow_blank = false

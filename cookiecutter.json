@@ -1,0 +1,9 @@
+{
+  "full_name": "Richard Sundqvist",
+  "email": "richard.sundqvist@live.se",
+  "organization": "Big Corporation Incorporated",
+  "namespace": "{{ cookiecutter.organization.lower().replace(' ', '_') }}",
+  "project_slug": "{{ cookiecutter.namespace.replace('_','-') }}-id-translation",
+  "rics_version": "\"~3.0.0\"",
+  "id_translation_version": "\"~0.3.0\""
+}

@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "{{cookiecutter.project_slug}}"
+version = "0.1.0"
+description = "Translation of IDs found in {{cookiecutter.organization}} databases."
+authors = ["{{cookiecutter.full_name}} <{{cookiecutter.email}}>"]
+readme = "README.md"
+packages = [{ include = "{{cookiecutter.namespace}}", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "<4,>=3.8"
+
+rics = {{cookiecutter.rics_version}}  # Defines the mapping logic
+id-translation = {{cookiecutter.id_translation_version}}  # Everything else related to translation
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.2.0"  #  A pure-Python PostgreSQL driver .
+pg8000 = "^1.29.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

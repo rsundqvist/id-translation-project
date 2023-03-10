@@ -1,0 +1,84 @@
+# Configuration for translation of IDs found in {{cookiecutter.organization}} databases."
+#
+# Home pages for the id-translation and RiCS packages:
+# * https://id-translation.readthedocs.io
+# * https://rics.readthedocs.io
+#
+# Overview/crash course pages:
+# * https://id-translation.readthedocs.io/en/stable/documentation/translation-primer.html#translation-primer
+# * https://rics.readthedocs.io/en/stable/documentation/mapping-primer.html#mapping-primer
+# * https://id-translation.readthedocs.io/en/stable/documentation/translator-config.html
+#
+# API documentation:
+# * The Translator class and the Translate.translate()-method, which is the main entry point for ID translation tasks.
+#   - https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.html#id_translation.Translator
+#   - https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.html#id_translation.Translator.translate
+#
+########################################################################################################################
+[translator]
+fmt = "{id}:{name}"
+[unknown_ids]
+fmt = "<Failed: {id!r}>"
+
+# ------------------------------------------------------------------------------
+# Name-to-source mapping configuration. Binds names to source, eg 'animal_id'
+# -> 'my_database.animals'. Overrides take precedence over scoring logic.
+#
+# Vocabulary:
+#       value: The name to map, for example the name of a Pandas series or column.
+#   candidate: Potential tables to match the value to.
+#     context: Not used for Name-to-source mapping.
+#
+# https://rics.readthedocs.io/en/stable/documentation/mapping-primer.html
+# https://rics.readthedocs.io/en/stable/_autosummary/rics.mapping.html
+#
+[translator.mapping]
+unmapped_values_action = "ignore"  # Logs on the DEBUG level
+score_function = "modified_hamming"
+verbose_logging = true  # Ignored unless rics.mapping.* log level = DEBUG
+cardinality = "N:1"  # Many-to-one mapping. Several names (e.g. DataFrame columns) can be mapped to the same table.
+
+# ------------------------------------------------------------------------------
+# https://rics.readthedocs.io/en/stable/_autosummary/rics.mapping.heuristic_functions.html
+[[translator.mapping.filter_functions]]
+function = "require_regex_match"
+regex = ".*_id$"  # Only translate names that end with '_id'
+where = "name"
+keep_if_match = true
+[[translator.mapping.filter_functions]]  # No use translating these kinds of IDs.
+function = "require_regex_match"
+regex = "session|query"  # A card ID is not translatable; we probably want the card holder (handled above).
+where = "name"
+keep_if_match = false
+
+# ------------------------------------------------------------------------------
+# https://rics.readthedocs.io/en/stable/_autosummary/rics.mapping.heuristic_functions.html
+# Set mutate=true to keep the new value and candidate names until mapping is complete.
+[[translator.mapping.score_function_heuristics]]  # Matches card_holder_id, ticker_holder_id, etc.
+function = "short_circuit_to_candidate"
+regex = "^.*holder_id$"
+target = "humans"
+[[translator.mapping.score_function_heuristics]]
+function = "like_database_table"
+mutate = true  # Keep this heuristic for the next heuristic function(s)
+[[translator.mapping.score_function_heuristics]]  # For tables with a prefix, eg all_animals instead of just animals
+function = "value_fstring_alias"
+fstring = "all{value}"  # We should not add '_' here, since like_database_table removes them.
+
+# ------------------------------------------------------------------------------
+# For mappings that are difficult or impossible to resolve using scoring logic.
+[translator.mapping.overrides]
+"This is hard!" = "not_a_logical_table"
+
+########################################################################################################################
+# Parallel fetching configuration.
+#
+# A MultiFetcher will be created automatically if there are multiple fetching
+# configurations are present. The 'fetchers'-argument is not allowed.
+#
+# https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.fetching.html#id_translation.fetching.MultiFetcher
+#
+[fetching.MultiFetcher]
+max_workers = 2
+duplicate_translation_action = "warn"
+duplicate_source_discovered_action = "raise"

@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "ute-id-translation"
+version = "0.1.0"
+description = "Translation of IDs found in Unit Testing Enthusiasts, Inc. databases."
+authors = ["Richard Sundqvist <richard.sundqvist@live.se>"]
+readme = "README.md"
+packages = [{ include = "ute", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "<4,>=3.8"
+
+rics = "~3.0.0"  # Defines the mapping logic
+id-translation = "~0.3.0"  # Everything else related to translation
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.2.0"  #  A pure-Python PostgreSQL driver .
+pg8000 = "^1.29.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
