@@ -1,12 +1,12 @@
 # ID Translation
-**Translation of IDs found in *Unit Testing Enthusiasts, Inc.* databases.**
+**Translation of IDs found in *Unit Testing Enthusiasts* databases.**
 
 The ``ute-id-translation`` package provides pre-configured ID translation, powered by the
 **RiCS** [![PyPI - Version](https://img.shields.io/pypi/v/rics.svg)](https://pypi.python.org/pypi/rics)
 and
 **ID Translation** [![PyPI - Version](https://img.shields.io/pypi/v/id-translation.svg)](https://pypi.python.org/pypi/id-translation)
 libraries. This project was generated from the [id-translation-project](https://github.com/rsundqvist/id-translation-project)
-cookiecutter template on  Friday, 10 Mar 2023.
+cookiecutter template on  Sunday, 12 Mar 2023.
 
 For an introduction to translation, please see the **Translation primer** and **Interpreting `id-translation` Logs**
 pages: 

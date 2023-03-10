@@ -1,4 +1,4 @@
-# Configuration for translation of IDs found in Unit Testing Enthusiasts, Inc. databases."
+# Configuration for translation of IDs found in Unit Testing Enthusiasts databases."
 #
 # Home pages for the id-translation and RiCS packages:
 # * https://id-translation.readthedocs.io
@@ -68,7 +68,7 @@ fstring = "all{value}"  # We should not add '_' here, since like_database_table 
 # ------------------------------------------------------------------------------
 # For mappings that are difficult or impossible to resolve using scoring logic.
 [translator.mapping.overrides]
-"This is hard!" = "not_a_logical_table"
+strange_name = "table-to-use"
 
 ########################################################################################################################
 # Parallel fetching configuration.

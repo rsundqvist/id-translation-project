@@ -16,7 +16,7 @@ connection_string = "postgresql+pg8000://postgres:Sofia123!@localhost:5002/sakil
 
 # Keep only one list-table, or neither for full access. This config is chosen to work with the templated test cases.
 # blacklist_tables = []
-whitelist_tables = ["address", "city", "country", "language"]  # Create artifical "need" for two fetching configs.
+whitelist_tables = ["address", "city", "country", "language"]  # Create artificial "need" for two fetching configs.
 include_views = false  # This is the default
 
 # ------------------------------------------------------------------------------
@@ -73,6 +73,6 @@ function = "like_database_table"
 # ------------------------------------------------------------------------------
 # For mappings that are difficult or impossible to resolve using scoring logic.
 [fetching.mapping.overrides]  # Shared overrides used for all tables
-wanted_column = "some_column"
+actual_column = "wanted_placeholder"
 [fetching.mapping.overrides.table_name]  # Overrides for 'table_name' only.
-wanted_column = "another_column"
+actual_column_in_table_name = "wanted_placeholder"

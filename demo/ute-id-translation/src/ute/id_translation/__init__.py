@@ -1,4 +1,4 @@
-"""Translation of IDs found in Unit Testing Enthusiasts, Inc. databases."""
+"""Translation of IDs found in Unit Testing Enthusiasts databases."""
 
 from . import config
 from ._initialize import create_translator, load_cached_translator

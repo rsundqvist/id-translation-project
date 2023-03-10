@@ -14,7 +14,7 @@ class CustomTranslator(_Translator):
 
 
 class CustomSqlFetcher(_SqlFetcher):
-    """A custom SqlFetcher for Unit Testing Enthusiasts, Inc..
+    """A custom SqlFetcher for Unit Testing Enthusiasts.
 
     Reads the database password from AWS and filters queries based on an 'enabled' status flag.
     """

@@ -68,7 +68,7 @@ fstring = "all{value}"  # We should not add '_' here, since like_database_table 
 # ------------------------------------------------------------------------------
 # For mappings that are difficult or impossible to resolve using scoring logic.
 [translator.mapping.overrides]
-"This is hard!" = "not_a_logical_table"
+strange_name = "table-to-use"
 
 ########################################################################################################################
 # Parallel fetching configuration.

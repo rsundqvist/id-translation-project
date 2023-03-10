@@ -68,6 +68,6 @@ function = "like_database_table"
 # ------------------------------------------------------------------------------
 # For mappings that are difficult or impossible to resolve using scoring logic.
 [fetching.mapping.overrides]  # Shared overrides used for all tables
-wanted_column = "some_column"
+actual_column = "wanted_placeholder"
 [fetching.mapping.overrides.table_name]  # Overrides for 'table_name' only.
-wanted_column = "another_column"
+actual_column_in_file = "wanted_placeholder"

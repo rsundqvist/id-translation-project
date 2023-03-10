@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "ute-id-translation"
 version = "0.1.0"
-description = "Translation of IDs found in Unit Testing Enthusiasts, Inc. databases."
+description = "Translation of IDs found in Unit Testing Enthusiasts databases."
 authors = ["Richard Sundqvist <richard.sundqvist@live.se>"]
 readme = "README.md"
 packages = [{ include = "ute", from = "src" }]
