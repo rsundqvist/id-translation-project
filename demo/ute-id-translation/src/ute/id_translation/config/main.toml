@@ -1,12 +1,11 @@
 # Configuration for translation of IDs found in Unit Testing Enthusiasts databases."
 #
-# Home pages for the id-translation and RiCS packages:
+# Home page:
 # * https://id-translation.readthedocs.io
-# * https://rics.readthedocs.io
 #
 # Overview/crash course pages:
-# * https://id-translation.readthedocs.io/en/stable/documentation/translation-primer.html#translation-primer
-# * https://rics.readthedocs.io/en/stable/documentation/mapping-primer.html#mapping-primer
+# * https://id-translation.readthedocs.io/en/stable/documentation/translation-primer.html
+# * https://id-translation.readthedocs.io/en/stable/documentation/mapping-primer.html
 # * https://id-translation.readthedocs.io/en/stable/documentation/translator-config.html
 #
 # API documentation:
@@ -29,17 +28,17 @@ fmt = "<Failed: {id!r}>"
 #   candidate: Potential tables to match the value to.
 #     context: Not used for Name-to-source mapping.
 #
-# https://rics.readthedocs.io/en/stable/documentation/mapping-primer.html
-# https://rics.readthedocs.io/en/stable/_autosummary/rics.mapping.html
+# https://id-translation.readthedocs.io/en/stable/documentation/mapping-primer.html
+# https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.html
 #
 [translator.mapping]
 unmapped_values_action = "ignore"  # Logs on the DEBUG level
 score_function = "modified_hamming"
-verbose_logging = true  # Ignored unless rics.mapping.* log level = DEBUG
+verbose_logging = false # High volume; set true only if needed
 cardinality = "N:1"  # Many-to-one mapping. Several names (e.g. DataFrame columns) can be mapped to the same table.
 
 # ------------------------------------------------------------------------------
-# https://rics.readthedocs.io/en/stable/_autosummary/rics.mapping.heuristic_functions.html
+# https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.heuristic_functions.html
 [[translator.mapping.filter_functions]]
 function = "require_regex_match"
 regex = ".*_id$"  # Only translate names that end with '_id'
@@ -52,7 +51,7 @@ where = "name"
 keep_if_match = false
 
 # ------------------------------------------------------------------------------
-# https://rics.readthedocs.io/en/stable/_autosummary/rics.mapping.heuristic_functions.html
+# https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.heuristic_functions.html
 # Set mutate=true to keep the new value and candidate names until mapping is complete.
 [[translator.mapping.score_function_heuristics]]  # Matches card_holder_id, ticker_holder_id, etc.
 function = "short_circuit_to_candidate"
