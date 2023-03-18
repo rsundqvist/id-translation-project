@@ -5,5 +5,5 @@
   "namespace": "{{ cookiecutter.organization.lower().replace(' ', '_') }}",
   "project_slug": "{{ cookiecutter.namespace.replace('_','-') }}-id-translation",
   "rics_version": "\"~3.0.0\"",
-  "id_translation_version": "\"~0.3.0\""
+  "id_translation_version": "\"~0.3.1\""
 }
