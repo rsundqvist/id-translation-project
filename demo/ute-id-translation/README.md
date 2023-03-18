@@ -6,7 +6,7 @@ The ``ute-id-translation`` package provides pre-configured ID translation, power
 and
 **ID Translation** [![PyPI - Version](https://img.shields.io/pypi/v/id-translation.svg)](https://pypi.python.org/pypi/id-translation)
 libraries. This project was generated from the [id-translation-project](https://github.com/rsundqvist/id-translation-project)
-cookiecutter template on  Sunday, 12 Mar 2023.
+cookiecutter template on  Saturday, 18 Mar 2023.
 
 For an introduction to translation, please see the **Translation primer** and **Interpreting `id-translation` Logs**
 pages: 
@@ -155,8 +155,8 @@ fully qualified path as the `function`-argument, e.g.
 will use `your_function` defined in [customization.py](src/ute/id_translation/customization.py), and will pass
 `do_a_good_job=True` whenever it is called. These functions must have the correct signature, see
 
-- https://rics.readthedocs.io/en/stable/_autosummary/rics.mapping.types.html#rics.mapping.types.AliasFunction
-- https://rics.readthedocs.io/en/stable/_autosummary/rics.mapping.types.html#rics.mapping.types.FilterFunction
+- https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.types.html#id_translation.mapping.types.AliasFunction
+- https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.types.html#id_translation.mapping.types.FilterFunction
 
 for details. The `(value, candidates, context)`-arguments are given by the `Mapper` and should not be specified in
 configuration. Custom Score and Filter functions may be defined in the same way.
@@ -173,7 +173,7 @@ always ask a question or report an issue on Github:
 
 ## Overview/crash course pages:
 * https://id-translation.readthedocs.io/en/stable/documentation/translation-primer.html
-* https://rics.readthedocs.io/en/stable/documentation/mapping-primer.html
+* https://id-translation.readthedocs.io/en/stable/documentation/mapping-primer.html
 
 ## TOML configuration files
 Documentation of the config format. Click [here](src/ute/id_translation/config/) to go to yours.
@@ -195,15 +195,15 @@ For help interpreting the logs emitted during ID translation, see the **Interpre
   do this yourself; the `Translator` and `AbstractFetcher` classes will call `Mapper.apply()` for you when they need it.
   Configuration for this class is found in the `[*.fetching]`-subsections.
 
-    - https://rics.readthedocs.io/en/stable/_autosummary/rics.mapping.html#rics.mapping.Mapper
-    - https://rics.readthedocs.io/en/stable/_autosummary/rics.mapping.html#rics.mapping.Mapper.apply
+    - https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.html#rics.mapping.Mapper
+    - https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.html#rics.mapping.Mapper.apply
 
 
 * There are a number of functions heuristics, filtering, and short-circuiting (a repurposed filter-function) that are
   included with the library.
 
-    - https://rics.readthedocs.io/en/stable/_autosummary/rics.mapping.filter_functions.html
-    - https://rics.readthedocs.io/en/stable/_autosummary/rics.mapping.heuristic_functions.html
+    - https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.filter_functions.html
+    - https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.heuristic_functions.html
 
   These are configured in `[[*.mapping.filter_functions]]` and `[[*.mapping.score_function_heuristics]]`
   list-subsections.
