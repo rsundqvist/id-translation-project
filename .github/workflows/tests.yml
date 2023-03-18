@@ -1,6 +1,9 @@
 name: tests
 
 on:
+  schedule:
+    - cron: "0 3 1 */2 *"  # 03:00 on the first of every second
+
   workflow_dispatch:
     inputs:
       logLevel:
@@ -25,7 +28,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        replay-file: [ "stable", "default" ]
+        replay-file: [ "stable", "default", "master" ]
     steps:
       - uses: actions/checkout@v3
 
