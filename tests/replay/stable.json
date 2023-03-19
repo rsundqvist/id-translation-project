@@ -5,7 +5,6 @@
     "organization": "Unit Testing Enthusiasts",
     "namespace": "ute",
     "project_slug": "ute-id-translation",
-    "rics_version": "\"*\"",
     "id_translation_version": "\"*\""
   }
 }

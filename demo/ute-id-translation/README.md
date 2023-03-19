@@ -2,11 +2,9 @@
 **Translation of IDs found in *Unit Testing Enthusiasts* databases.**
 
 The ``ute-id-translation`` package provides pre-configured ID translation, powered by the
-**RiCS** [![PyPI - Version](https://img.shields.io/pypi/v/rics.svg)](https://pypi.python.org/pypi/rics)
-and
 **ID Translation** [![PyPI - Version](https://img.shields.io/pypi/v/id-translation.svg)](https://pypi.python.org/pypi/id-translation)
-libraries. This project was generated from the [id-translation-project](https://github.com/rsundqvist/id-translation-project)
-cookiecutter template on  Saturday, 18 Mar 2023.
+library. This project was generated from the [id-translation-project](https://github.com/rsundqvist/id-translation-project)
+cookiecutter template on  Sunday, 19 Mar 2023.
 
 For an introduction to translation, please see the **Translation primer** and **Interpreting `id-translation` Logs**
 pages: 
@@ -162,14 +160,13 @@ for details. The `(value, candidates, context)`-arguments are given by the `Mapp
 configuration. Custom Score and Filter functions may be defined in the same way.
 
 # Need help?
-This section contains links to **RiCS** and **ID Translation** project documentation. If nothing else works, you can 
-always ask a question or report an issue on Github:
+This section contains links to **ID Translation** project documentation. If nothing else works, you can  always ask a
+question or report an issue on Github:
 
 * https://github.com/rsundqvist/id-translation-project/issues/new
 
-## Home pages for the id-translation and RiCS packages:
+## Home page
 * https://id-translation.readthedocs.io
-* https://rics.readthedocs.io
 
 ## Overview/crash course pages:
 * https://id-translation.readthedocs.io/en/stable/documentation/translation-primer.html
@@ -195,8 +192,8 @@ For help interpreting the logs emitted during ID translation, see the **Interpre
   do this yourself; the `Translator` and `AbstractFetcher` classes will call `Mapper.apply()` for you when they need it.
   Configuration for this class is found in the `[*.fetching]`-subsections.
 
-    - https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.html#rics.mapping.Mapper
-    - https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.html#rics.mapping.Mapper.apply
+    - https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.html#id_translation.mapping.Mapper
+    - https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.html#id_translation.mapping.Mapper.apply
 
 
 * There are a number of functions heuristics, filtering, and short-circuiting (a repurposed filter-function) that are

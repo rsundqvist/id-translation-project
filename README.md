@@ -34,7 +34,6 @@ listed below.
 | organization            | Decides how a number of classes will be named, as well as some flavor text.                             |
 | namespace               | Python namespace for the new package, e.g. `from <namespace>.id_translation import translate`.          |
 | project_slug            | The name of the new project, e.g. `pip install <namespace-id-translation`.                              |
-| rics_version*           | Version of the [RiCS](https://github.com/rsundqvist/rics/) package, which provides all mapping modules. |
 | id_translation_version* | Version of the [id-translation](https://github.com/rsundqvist/id-translation) package.                  |
 
 *The defaults versions are exact known "good" versions.
@@ -142,9 +141,8 @@ tests/test_basics.py <span style="color: #4E9A06; ">......                      
 </pre>
 
 # Next steps
-Check out the `README.md`-file of the generated project for more information, or take a peek at the **RiCS** and
-**ID Translation** project documentation.
-* https://rics.readthedocs.io/
+Check out the `README.md`-file of the generated project for more information, or take a peek at the **ID Translation**
+project documentation:
 * https://id-translation.readthedocs.io/
 
 For an introduction to translation, please see the **Translation primer** and **Interpreting `id-translation` Logs**
