@@ -74,6 +74,7 @@ ute-id-translation/
 │           │   │   └── geography.toml
 │           │   │   └── inactive/
 │           │   │       ├── csv-files-in-s3.toml  # <-------- fetching from file
+│           │   │       ├── override-only.toml  # <- alternative fetching config
 │           │   │       └── README.txt
 │           │   └── main.toml  # <---------------------- main translation config
 │           └── customization.py  # <---------- optional specialization examples
@@ -127,7 +128,10 @@ name = "nejm"  # Maybe we could fix this in the database instead?
 
 to disable Placeholder-to-column mapping your
 [fetching configuration files](src/ute/id_translation/config/fetching). Overrides are not needed
-for columns that are an exact match, i.e. you don't have to specify `name = "name"` anywhere.
+for columns that are an exact match, i.e. you don't have to specify `id = "id"` anywhere. More details may be found in
+the [Override-only mapping (link to `id-translation`)](https://id-translation.readthedocs.io/en/stable/documentation/mapping-primer.html#override-only-mapping)
+documentation, or check out [inactive/override-only.toml](src/ute/config/fetching/inactive/override-only.toml) 
+for a limited but working example.
 
 ## 🔧 Non-SQL translation sources
 It's possible to simply enumerate translations manually using

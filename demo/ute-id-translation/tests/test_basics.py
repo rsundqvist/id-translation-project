@@ -47,3 +47,15 @@ def test_load_cached_translator(tmp_path):
     translator = id_translation.load_cached_translator()
     actual = translator.translate(DATA)
     pd.testing.assert_frame_equal(EXPECTED, actual)
+
+
+def test_override_only(monkeypatch):
+    """Contains all configuration which is not specific to a single fetcher."""
+    from ute.id_translation import config
+
+    onverride_only = config._config_root / "fetching/inactive/override-only.toml"
+    monkeypatch.setattr(config, "FETCHING_CONFIGURATION_PATHS", [onverride_only])
+    translator = id_translation.create_translator()
+    assert translator.fetcher.mapper._score.__name__ == "disabled"
+    actual = translator.translate(DATA)
+    pd.testing.assert_frame_equal(EXPECTED, actual)

@@ -60,6 +60,7 @@ bci-id-translation/  # <----------------------------------------- <project_slug>
 │           │   │   └── geography.toml
 │           │   │   └── inactive/
 │           │   │       ├── csv-files-in-s3.toml  # <-------- fetching from file
+│           │   │       ├── override-only.toml  # <- alternative fetching config
 │           │   │       └── README.txt
 │           │   └── main.toml  # <---------------------- main translation config
 │           └── customization.py  # <---------- optional specialization examples
