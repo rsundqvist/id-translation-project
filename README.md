@@ -42,7 +42,7 @@ listed below.
 will be **bci-id-translation** to save terminal space.
 
 Generated project structure:
-```
+```bash
 bci-id-translation/  # <----------------------------------------- <project_slug>
 ├── pyproject.toml
 ├── pytest.ini

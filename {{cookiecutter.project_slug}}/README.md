@@ -56,7 +56,7 @@ You'll find links to API documentation and crash courses [near the end](#need-he
 
 ## 🔧 Generated project structure
 The generated project structure, and some possible TODOs.
-```
+```bash
 {{cookiecutter.project_slug}}/
 ├── pyproject.toml
 ├── pytest.ini

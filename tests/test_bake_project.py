@@ -48,5 +48,7 @@ def test_poetry_install(project_workdir):
 
 
 def test_run_tests(project_workdir):
-    result = subprocess.run(["poetry", "run", "pytest", ], stderr=subprocess.STDOUT)
+    env = os.environ.copy()
+    env["PYTEST_ADDOPTS"] = "--color=yes"
+    result = subprocess.run(["poetry", "run", "pytest", ], stderr=subprocess.STDOUT, env=env)
     assert result.returncode == 0
