@@ -14,10 +14,11 @@ class CustomTranslator(_Translator):
 
 
 class CustomSqlFetcher(_SqlFetcher):
-    """A custom SqlFetcher for Unit Testing Enthusiasts.
+    """A custom SqlFetcher for Big Corporation Inc..
 
     Reads the database password from AWS and filters queries based on an 'enabled' status flag.
     """
+
     @classmethod
     def parse_connection_string(cls, connection_string, password_key):
         """Finalize the connection string by reading the password from AWS."""

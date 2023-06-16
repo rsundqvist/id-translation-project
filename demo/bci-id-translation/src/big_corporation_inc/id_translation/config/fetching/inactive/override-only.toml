@@ -1,5 +1,5 @@
 # Uncomment to use custom implementation
-# [fetching.'ute.id_translation.customization.CustomSqlFetcher']
+# [fetching.'big_corporation_inc.id_translation.customization.CustomSqlFetcher']
 [fetching.SqlFetcher]
 # ------------------------------------------------------------------------------
 # Implementation-specific configuration. All available arguments to the

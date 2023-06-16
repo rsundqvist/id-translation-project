@@ -1,10 +1,10 @@
 # ID Translation
-**Translation of IDs found in *Unit Testing Enthusiasts* databases.**
+**Translation of IDs found in *Big Corporation Inc.* databases.**
 
-The ``ute-id-translation`` package provides pre-configured ID translation, powered by the
+The ``bci-id-translation`` package provides pre-configured ID translation, powered by the
 **ID Translation** [![PyPI - Version](https://img.shields.io/pypi/v/id-translation.svg)](https://pypi.python.org/pypi/id-translation)
 library. This project was generated from the [id-translation-project](https://github.com/rsundqvist/id-translation-project)
-cookiecutter template on  Saturday, 20 May 2023.
+cookiecutter template on  Friday, 16 Jun 2023.
 
 For an introduction to translation, please see the **Translation primer** and **Interpreting `id-translation` Logs**
 pages: 
@@ -20,23 +20,23 @@ for this function.
 Install either for development (with Poetry) or for regular use (with pip).
 ```bash
 poetry install  # Install for development and tests
-pip install ute-id-translation  # Install as a regular package
+pip install bci-id-translation  # Install as a regular package
 ```
-The fastest way to translate something is the `ute.id_translation.translate()`-function:
+The fastest way to translate something is the `big_corporation_inc.id_translation.translate()`-function:
 ```python
-from ute.id_translation import translate
+from big_corporation_inc.id_translation import translate
 translate(df, inplace=True)
 ```
 This will translate columns in _df_ that end with _'\_id'_, gathering and fetching requested IDs from the database. You
 can get a preloaded `Translator` with the `load_cached_translator()`-function:
 ```python
-from ute.id_translation import load_cached_translator
+from big_corporation_inc.id_translation import load_cached_translator
 translator = load_cached_translator(max_age="0d")  # max_age="0d" forces recreation of the local cache.
 translator.translate(df, inplace=True)
 ```
 The final option is to create a fresh translator instance:
 ```python
-from ute.id_translation import create_translator
+from big_corporation_inc.id_translation import create_translator
 translator = create_translator()
 ```
 Translators created this way will be online (connected to a fetcher) with no data stored locally. Having a "clean"
@@ -45,8 +45,8 @@ instance allows customization of the translator through the `Translator.copy(**o
 You can override any pre-configured option this way. Use with care, this may break the Translator in confusing ways 🙂.
 
 # 🔧 Configuring a new project
-Basic [configuration](src/ute/id_translation/config) and 
-[factory methods](src/ute/id_translation/_initialize.py) are included, as well as some simple
+Basic [configuration](src/big_corporation_inc/id_translation/config) and 
+[factory methods](src/big_corporation_inc/id_translation/_initialize.py) are included, as well as some simple
 tests. Copying and adjusting the included [tests](tests/test_basics.py) is an easy way to ensure that basic connectivity
 and functionality is working as intended while modifying the included configuration to match your domain.
 
@@ -57,33 +57,36 @@ You'll find links to API documentation and crash courses [near the end](#need-he
 ## 🔧 Generated project structure
 The generated project structure, and some possible TODOs.
 ```bash
-ute-id-translation/
+bci-id-translation/
 ├── pyproject.toml
 ├── pytest.ini
 ├── README.md
 ├── src/
-│   └── ute/
+│   └── big_corporation_inc/
 │       └── id_translation/
-│           ├── __init__.py
-│           ├── _initialize.py
-│           ├── _translate.py
-│           ├── config.py  # <-------- you might want to change config.CACHE_DIR
 │           ├── config/
 │           │   ├── fetching/  # <------------------------------ fetching config
 │           │   │   ├── dvd-rental-store.toml
-│           │   │   └── geography.toml
+│           │   │   ├── geography.toml
 │           │   │   └── inactive/
 │           │   │       ├── csv-files-in-s3.toml  # <-------- fetching from file
 │           │   │       ├── override-only.toml  # <- alternative fetching config
 │           │   │       └── README.txt
-│           │   └── main.toml  # <---------------------- main translation config
-│           └── customization.py  # <---------- optional specialization examples
-└── tests/
-    ├── __init__.py
+│           │   ├── main.toml  # <---------------------- main translation config
+│           │   └── metaconf.toml
+│           ├── config.py  # <-------- you might want to change config.CACHE_DIR
+│           ├── customization.py  # <---------- optional specialization examples
+│           ├── _initialize.py
+│           ├── __init__.py
+│           ├── py.typed
+│           └── _translate.py
+└── tests
     ├── conftest.py  # <-------- causes tests to fail if database is unreachable
-    └── test_basics.py
+    ├── __init__.py
+    ├── test_basics.py
+    └── test_demo_some_things.py
 ```
-All commands should be executed from the `ute-id-translation` directory.
+All commands should be executed from the `bci-id-translation` directory.
 
 ## 🔧 Executing the included tests
 The included tests run against the [Sakila DVD rental sample database](https://hub.docker.com/r/rsundqvist/sakila-preload).
@@ -114,7 +117,7 @@ name1 = "table0"  # Same table as before
 name2 = "table2"
 ```
 
-in [main.toml](src/ute/id_translation/config/main.toml) to force manual Name-to-table mapping,
+in [main.toml](src/big_corporation_inc/id_translation/config/main.toml) to force manual Name-to-table mapping,
 and
 
 ```toml
@@ -127,10 +130,10 @@ name = "nejm"  # Maybe we could fix this in the database instead?
 ```
 
 to disable Placeholder-to-column mapping your
-[fetching configuration files](src/ute/id_translation/config/fetching). Overrides are not needed
+[fetching configuration files](src/big_corporation_inc/id_translation/config/fetching). Overrides are not needed
 for columns that are an exact match, i.e. you don't have to specify `id = "id"` anywhere. More details may be found in
 the [Override-only mapping (link to `id-translation`)](https://id-translation.readthedocs.io/en/stable/documentation/mapping-primer.html#override-only-mapping)
-documentation, or check out [inactive/override-only.toml](src/ute/config/fetching/inactive/override-only.toml) 
+documentation, or check out [inactive/override-only.toml](src/big_corporation_inc/config/fetching/inactive/override-only.toml) 
 for a limited but working example.
 
 ## 🔧 Non-SQL translation sources
@@ -141,7 +144,7 @@ for example S3 (additional dependencies required). See the [PandasFetcher](https
 documentation for details.
 
 An example using CSV files stored in S3 can be found in
-[inactive/csv-files-in-s3.toml](src/ute/id_translation/config/fetching/inactive/csv-files-in-s3.toml)
+[inactive/csv-files-in-s3.toml](src/big_corporation_inc/id_translation/config/fetching/inactive/csv-files-in-s3.toml)
 in this project.
 
 ## 🔧 Advanced mapping
@@ -150,7 +153,7 @@ fully qualified path as the `function`-argument, e.g.
 
   ```toml
   [[*.mapping.score_function_heuristics]]
-  function = "ute.id_translation.customization.your_function"
+  function = "big_corporation_inc.id_translation.customization.your_function"
   do_a_good_job = true
   ```
 
@@ -177,7 +180,7 @@ question or report an issue on Github:
 * https://id-translation.readthedocs.io/en/stable/documentation/mapping-primer.html
 
 ## TOML configuration files
-Documentation of the config format. Click [here](src/ute/id_translation/config/) to go to yours.
+Documentation of the config format. Click [here](src/big_corporation_inc/id_translation/config/) to go to yours.
 
 * https://id-translation.readthedocs.io/en/stable/documentation/translator-config.html
 

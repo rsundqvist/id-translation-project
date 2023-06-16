@@ -1,16 +1,17 @@
 from pprint import pprint
 
-from ute import id_translation
+from big_corporation_inc import id_translation
 
 
 def test_fancy_format_string():
     print("\nSome more information about the first three:")
-    pprint(id_translation.translate(
-        [1, 2, 3],
-        names="customer_id",
-        fmt="{name} <{email!r}> {last_name}",
-
-    ))
+    pprint(
+        id_translation.translate(
+            [1, 2, 3],
+            names="customer_id",
+            fmt="{name} <{email!r}> {last_name}",
+        )
+    )
 
 
 def test_untranslatable_ids():

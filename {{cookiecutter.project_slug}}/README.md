@@ -64,24 +64,27 @@ The generated project structure, and some possible TODOs.
 ├── src/
 │   └── {{cookiecutter.namespace}}/
 │       └── id_translation/
-│           ├── __init__.py
-│           ├── _initialize.py
-│           ├── _translate.py
-│           ├── config.py  # <-------- you might want to change config.CACHE_DIR
 │           ├── config/
 │           │   ├── fetching/  # <------------------------------ fetching config
 │           │   │   ├── dvd-rental-store.toml
-│           │   │   └── geography.toml
+│           │   │   ├── geography.toml
 │           │   │   └── inactive/
 │           │   │       ├── csv-files-in-s3.toml  # <-------- fetching from file
 │           │   │       ├── override-only.toml  # <- alternative fetching config
 │           │   │       └── README.txt
-│           │   └── main.toml  # <---------------------- main translation config
-│           └── customization.py  # <---------- optional specialization examples
-└── tests/
-    ├── __init__.py
+│           │   ├── main.toml  # <---------------------- main translation config
+│           │   └── metaconf.toml
+│           ├── config.py  # <-------- you might want to change config.CACHE_DIR
+│           ├── customization.py  # <---------- optional specialization examples
+│           ├── _initialize.py
+│           ├── __init__.py
+│           ├── py.typed
+│           └── _translate.py
+└── tests
     ├── conftest.py  # <-------- causes tests to fail if database is unreachable
-    └── test_basics.py
+    ├── __init__.py
+    ├── test_basics.py
+    └── test_demo_some_things.py
 ```
 All commands should be executed from the `{{cookiecutter.project_slug}}` directory.
 

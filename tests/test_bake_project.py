@@ -6,7 +6,7 @@ import pytest
 from pathlib import Path
 from directory_tree import display_tree
 
-GENERATED_PROJECT_SLUG = "ute-id-translation"
+GENERATED_PROJECT_SLUG = "bci-id-translation"
 REPLAY_FILE = os.getenv("REPLAY_FILE", "stable")
 
 

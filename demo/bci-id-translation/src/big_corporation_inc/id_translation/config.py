@@ -13,7 +13,7 @@ CACHE_DIR = _Path.home().joinpath(".cache/id-translation/")
 """Location of the persistent ``Translator`` instance.
 
 This variable determines where the ``Translator`` instance created by 
-:func:`ute.id_translation.load_cached_translator`
+:func:`big_corporation_inc.id_translation.load_cached_translator`
 is placed. If ``Fetcher``-specific caching is used as well, this data is
 stored in ``~/.cache/id-translation/cached-fetcher-data/``.
 

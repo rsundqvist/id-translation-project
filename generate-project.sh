@@ -1,8 +1,10 @@
 set -e
 
 REPLAY_FILE=tests/replay/default.json
+OUTPUT_DIR=demo
 
-rm -rf ute-id-translation/*.*  ute-id-translation/src ute-id-translation/tests
-cookiecutter . --replay-file $REPLAY_FILE -f --output-dir demo
-cp $REPLAY_FILE demo/replay.json
-tree demo/ute-id-translation/
+rm -rf $OUTPUT_DIR/bci-id-translation
+cookiecutter . --replay-file $REPLAY_FILE -f --output-dir $OUTPUT_DIR
+black -l 120 $OUTPUT_DIR
+cp $REPLAY_FILE $OUTPUT_DIR/replay.json
+tree $OUTPUT_DIR/bci-id-translation/

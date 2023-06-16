@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "ute-id-translation"
+name = "bci-id-translation"
 version = "0.2.0"
-description = "Translation of IDs found in Unit Testing Enthusiasts databases."
+description = "Translation of IDs found in Big Corporation Inc. databases."
 authors = ["Richard Sundqvist <richard.sundqvist@live.se>"]
 readme = "README.md"
-packages = [{ include = "ute", from = "src" }]
+packages = [{ include = "big_corporation_inc", from = "src" }]
 
 [tool.poetry.dependencies]
 python = "<4,>=3.8"
