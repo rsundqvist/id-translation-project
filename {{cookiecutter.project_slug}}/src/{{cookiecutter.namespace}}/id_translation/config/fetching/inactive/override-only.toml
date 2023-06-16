@@ -16,8 +16,7 @@ connection_string = "postgresql+pg8000://postgres:Sofia123!@localhost:5002/sakil
 # engine_kwargs.fast_executemany = true  # Not supported by all drivers
 
 # Keep only one list-table, or neither for full access. This config is chosen to work with the templated test cases.
-blacklist_tables = ["address", "city", "country", "language"]  # Create artificial "need" for two fetching configs.
-# whitelist_tables = []
+whitelist_tables = ["category", "country", "customer"]
 include_views = false  # This is the default
 
 # ------------------------------------------------------------------------------
@@ -40,41 +39,33 @@ fetch_all_cache_max_age = "0d"  # No fetcher-specific cache (default).
 # https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.html
 #
 [fetching.mapping]
-unmapped_values_action = "ignore"  # Logs on the DEBUG level
-score_function = "modified_hamming"
+# Placeholder mapping configuration. Binds actual names in sources (such as
+# column names in an SQL table) to wanted names, eg id = 'animal_id'.
+#
+# Vocabulary:
+#       value: A placeholder to match to a column name.
+#   candidate: The name of a column in a table.
+#     context: The name of the current table (the 'source').
+#
+# https://id-translation.readthedocs.io/en/stable/documentation/mapping-primer.html
+# https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.html
+#
 verbose_logging = false  # High volume; set true only if needed
 
-# ------------------------------------------------------------------------------
-# https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.filter_functions.html
-[[fetching.mapping.filter_functions]]  # Avoid tables that contain banned keywords.
-function = "filter_sources"
-regex = "^(previous|old)_.*"
-remove = true
-[[fetching.mapping.filter_functions]]  # No safety incidents please!
-function = "filter_placeholders"
-regex = ".*(password|hash).*"
-remove = true
+[fetching.mapping.score_function.disabled]
+# Using strict scoreless mapping to control access to the database.
+#
+# https://id-translation.readthedocs.io/en/stable/documentation/mapping-primer.html#override-only-mapping
+strict = true
 
 # ------------------------------------------------------------------------------
-# https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.heuristic_functions.html
-# Set mutate=true to keep the new value and candidate names until mapping is complete.
-[[fetching.mapping.score_function_heuristics]]  # For tables with a prefix, e.g. first_animals instead of just animals
-function = "value_fstring_alias"
-fstring = "first_{value}"
-[[fetching.mapping.score_function_heuristics]] # Handle smurf naming, e.g. column 'animal_id' in table 'animals'
-function = "value_fstring_alias"
-fstring = "{context}_{value}"
-[[fetching.mapping.score_function_heuristics]] # Name column is table name, e.g. 'animals.animal' instead if 'animals.name'.
-function = "value_fstring_alias"
-fstring = "{context}"
-for_value = "name"  # Required since {name} is not in the fstring
-[[fetching.mapping.score_function_heuristics]]
-function = "like_database_table"
-
-# ------------------------------------------------------------------------------
-# Manual wanted-to-actual placeholder mapping. Use for mappings that are
-# difficult or impossible to resolve using scoring logic.
-[fetching.mapping.overrides]  # Shared overrides used for all tables
-wanted_placeholder = "actual_column"
-[fetching.mapping.overrides.table_name]  # Overrides for 'table_name' only.
-wanted_placeholder = "actual_column_in_table_name"
+# Manual wanted-to-actual placeholder mapping.
+[fetching.mapping.overrides]
+[fetching.mapping.overrides.customer]
+id = "customer_id"
+name = "first_name"
+[fetching.mapping.overrides.category]
+id = "category_id"
+[fetching.mapping.overrides.country]
+id = "country_id"
+name = "country"

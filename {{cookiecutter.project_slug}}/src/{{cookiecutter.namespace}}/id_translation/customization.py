@@ -18,6 +18,7 @@ class CustomSqlFetcher(_SqlFetcher):
 
     Reads the database password from AWS and filters queries based on an 'enabled' status flag.
     """
+
     @classmethod
     def parse_connection_string(cls, connection_string, password_key):
         """Finalize the connection string by reading the password from AWS."""

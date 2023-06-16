@@ -1,4 +1,4 @@
-# Configuration for translation of IDs found in Unit Testing Enthusiasts databases."
+# Configuration for translation of IDs found in Big Corporation Inc. databases."
 #
 # Home page:
 # * https://id-translation.readthedocs.io
@@ -16,6 +16,7 @@
 ########################################################################################################################
 [translator]
 fmt = "{id}:{name}"
+enable_uuid_heuristics = false  # Enable if your UUIDs are not being translated.
 [unknown_ids]
 fmt = "<Failed: {id!r}>"
 
@@ -40,23 +41,21 @@ cardinality = "N:1"  # Many-to-one mapping. Several names (e.g. DataFrame column
 # ------------------------------------------------------------------------------
 # https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.heuristic_functions.html
 [[translator.mapping.filter_functions]]
-function = "require_regex_match"
-regex = ".*_id$"  # Only translate names that end with '_id'
-where = "name"
-keep_if_match = true
-[[translator.mapping.filter_functions]]  # No use translating these kinds of IDs.
-function = "require_regex_match"
-regex = "session|query"  # A card ID is not translatable; we probably want the card holder (handled above).
-where = "name"
-keep_if_match = false
+function = "filter_names"
+regex = ".*_id$"
+remove = false  # This is the default (like the built-in filter).
+[[translator.mapping.filter_functions]]
+function = "filter_names"
+regex = "session|query"  # A card ID is not translatable; we probably want the card holder (handled below).
+remove = true
 
 # ------------------------------------------------------------------------------
 # https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.heuristic_functions.html
 # Set mutate=true to keep the new value and candidate names until mapping is complete.
 [[translator.mapping.score_function_heuristics]]  # Matches card_holder_id, ticker_holder_id, etc.
-function = "short_circuit_to_candidate"
-regex = "^.*holder_id$"
-target = "humans"
+function = "short_circuit"
+value_regex = "^.*holder_id$"
+target_candidate = "humans"
 [[translator.mapping.score_function_heuristics]]
 function = "like_database_table"
 mutate = true  # Keep this heuristic for the next heuristic function(s)
@@ -65,7 +64,8 @@ function = "value_fstring_alias"
 fstring = "all{value}"  # We should not add '_' here, since like_database_table removes them.
 
 # ------------------------------------------------------------------------------
-# For mappings that are difficult or impossible to resolve using scoring logic.
+# Manual name-to-source mapping. Use for mappings that are difficult or
+# impossible to resolve using scoring logic.
 [translator.mapping.overrides]
 strange_name = "table-to-use"
 

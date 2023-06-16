@@ -12,13 +12,13 @@ A cookiecutter template backed by my [id-translation](https://github.com/rsundqv
 
 ## What is it?
 A template for a working starting point for creating specialized ID translation packages for an organization. For an
-example of a generated project, see this [demo project](demo/ute-id-translation). The parameters used for the demo may 
+example of a generated project, see this [demo project](demo/bci-id-translation). The parameters used for the demo may 
 be found [here](demo/replay.json).
 
 The ID translation library is hosted here: https://github.com/rsundqvist/id-translation
 
 # Quickstart
-Check out the [demo project](demo/ute-id-translation) to see what the end result might be.
+Check out the [demo project](demo/bci-id-translation) to see what the end result might be.
 
 ## 1. Generate the project
 Install the latest version of `cookiecutter`, then generate a new `id-translation` project.
@@ -29,44 +29,45 @@ cookiecutter https://github.com/rsundqvist/id-translation-project.git
 Cookiecutter will ask you for a few inputs. You can use the defaults for most of them. The most important ones are
 listed below.
 
-| The keys                | What they're used for                                                                                   |
-|-------------------------|---------------------------------------------------------------------------------------------------------|
-| organization            | Decides how a number of classes will be named, as well as some flavor text.                             |
-| namespace               | Python namespace for the new package, e.g. `from <namespace>.id_translation import translate`.          |
-| project_slug            | The name of the new project, e.g. `pip install <namespace-id-translation`.                              |
-| id_translation_version* | Version of the [id-translation](https://github.com/rsundqvist/id-translation) package.                  |
+| The keys               | What they're used for                                                                          |
+|------------------------|------------------------------------------------------------------------------------------------|
+| organization           | Base name used for generated code, as well as some flavor text, e.g. _Big Corporation Inc._    |
+| namespace              | Python namespace for the new package, e.g. `from <namespace>.id_translation import translate`. |
+| project_slug           | The name of the new project, e.g. `pip install <namespace>-id-translation`.                    |
+| id_translation_version | Version of the [id-translation](https://github.com/rsundqvist/id-translation) package.         |
 
-*The defaults versions are exact known "good" versions.
-
-❗ Subsequent steps will assume that **defaults were used** for all Cookiecutter prompts, except `project_slug` which
-will be **bci-id-translation** to save terminal space.
+❗ Subsequent steps will assume that **defaults were used** for all Cookiecutter prompts.
 
 Generated project structure:
-```
+```bash
 bci-id-translation/  # <----------------------------------------- <project_slug>
 ├── pyproject.toml
 ├── pytest.ini
 ├── README.md
 ├── src/
-│   └── big_corporation_incorporated/   # <------------------------- <namespace>
+│   └── big_corporation_inc/   # <---------------------------------- <namespace>
 │       └── id_translation/
-│           ├── __init__.py
-│           ├── _initialize.py
-│           ├── _translate.py
-│           ├── config.py  # <-------- you might want to change config.CACHE_DIR
 │           ├── config/
 │           │   ├── fetching/  # <------------------------------ fetching config
 │           │   │   ├── dvd-rental-store.toml
-│           │   │   └── geography.toml
+│           │   │   ├── geography.toml
 │           │   │   └── inactive/
 │           │   │       ├── csv-files-in-s3.toml  # <-------- fetching from file
+│           │   │       ├── override-only.toml  # <- alternative fetching config
 │           │   │       └── README.txt
-│           │   └── main.toml  # <---------------------- main translation config
-│           └── customization.py  # <---------- optional specialization examples
-└── tests/
-    ├── __init__.py
+│           │   ├── main.toml  # <---------------------- main translation config
+│           │   └── metaconf.toml
+│           ├── config.py  # <-------- you might want to change config.CACHE_DIR
+│           ├── customization.py  # <---------- optional specialization examples
+│           ├── _initialize.py
+│           ├── __init__.py
+│           ├── py.typed
+│           └── _translate.py
+└── tests
     ├── conftest.py  # <-------- causes tests to fail if database is unreachable
-    └── test_basics.py
+    ├── __init__.py
+    ├── test_basics.py
+    └── test_demo_some_things.py
 ```
 
 ## 2. Install the project development environment with Poetry
@@ -87,7 +88,7 @@ Creating virtualenv <span style="color: #06989A; ">bci-id-translation</span> in 
   ...
   <span style="color: #4E9A06; "><b>•</b></span> Installing <span style="color: #06989A; ">rics</span> (<span style="color: #4E9A06; ">3.0.0</span>)
   <span style="color: #4E9A06; "><b>•</b></span> Installing <span style="color: #06989A; ">sqlalchemy</span> (<span style="color: #4E9A06; ">2.0.4</span>)
-  <span style="color: #4E9A06; "><b>•</b></span> Installing <span style="color: #06989A; ">id-translation</span> (<span style="color: #4E9A06; ">0.3.0</span>)
+  <span style="color: #4E9A06; "><b>•</b></span> Installing <span style="color: #06989A; ">id-translation</span> (<span style="color: #4E9A06; ">0.4.0</span>)
   <span style="color: #4E9A06; "><b>•</b></span> Installing <span style="color: #06989A; ">pg8000</span> (<span style="color: #4E9A06; ">1.29.4</span>)
   <span style="color: #4E9A06; "><b>•</b></span> Installing <span style="color: #06989A; ">pytest</span> (<span style="color: #4E9A06; ">7.2.2</span>)
 

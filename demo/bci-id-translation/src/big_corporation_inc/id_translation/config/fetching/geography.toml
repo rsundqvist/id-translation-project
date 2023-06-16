@@ -1,12 +1,11 @@
 # Uncomment to use custom implementation
-# [fetching.'ute.id_translation.customization.CustomSqlFetcher']
+# [fetching.'big_corporation_inc.id_translation.customization.CustomSqlFetcher']
 [fetching.SqlFetcher]
 # ------------------------------------------------------------------------------
 # Implementation-specific configuration. All available arguments to the
 # AbstractFetcher and SqlFetcher-classes may be used here, except 'mapper' (see
 # subsection [fetching.mapping]).
 #
-# https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.fetching.html#id_translation.fetching.AbstractFetcher
 # https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.fetching.html#id_translation.fetching.SqlFetcher
 #
 connection_string = "postgresql+pg8000://postgres:Sofia123!@localhost:5002/sakila"
@@ -16,8 +15,8 @@ connection_string = "postgresql+pg8000://postgres:Sofia123!@localhost:5002/sakil
 # engine_kwargs.fast_executemany = true  # Not supported by all drivers
 
 # Keep only one list-table, or neither for full access. This config is chosen to work with the templated test cases.
-blacklist_tables = ["address", "city", "country", "language"]  # Create artificial "need" for two fetching configs.
-# whitelist_tables = []
+# blacklist_tables = []
+whitelist_tables = ["address", "city", "country", "language"]  # Create artificial "need" for two fetching configs.
 include_views = false  # This is the default
 
 # ------------------------------------------------------------------------------
@@ -25,7 +24,7 @@ include_views = false  # This is the default
 #
 # https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.fetching.html#id_translation.fetching.AbstractFetcher
 selective_fetch_all = true
-fetch_all_cache_max_age = "0d"  # No fetcher-specific cache (default).
+fetch_all_cache_max_age = "30d"  # Enable caching; geography rarely changes.
 
 # ------------------------------------------------------------------------------
 # Placeholder mapping configuration. Binds actual names in sources (such as
@@ -40,20 +39,20 @@ fetch_all_cache_max_age = "0d"  # No fetcher-specific cache (default).
 # https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.html
 #
 [fetching.mapping]
-unmapped_values_action = "warn"  # Logs on the WARNING level
+unmapped_values_action = "ignore"  # Logs on the DEBUG level
 score_function = "modified_hamming"
 verbose_logging = false # High volume; set true only if needed
 
 # ------------------------------------------------------------------------------
 # https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.filter_functions.html
 [[fetching.mapping.filter_functions]]  # Avoid tables that contain banned keywords.
-function = "banned_substring"
-substrings = ["previous_", "old_"]
-where = "context"  # Table name may not contain 'previous_' or 'old_'
+function = "filter_sources"
+regex = "^(previous|old)_.*"
+remove = true
 [[fetching.mapping.filter_functions]]  # No safety incidents please!
-function = "banned_substring"
-substrings = ["password", "hash"]
-where = "candidate"  # Column name may not contain 'password' or 'hash'
+function = "filter_placeholders"
+regex = ".*(password|hash).*"
+remove = true
 
 # ------------------------------------------------------------------------------
 # https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.heuristic_functions.html

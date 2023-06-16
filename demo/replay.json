@@ -2,9 +2,9 @@
   "cookiecutter": {
     "full_name": "Richard Sundqvist",
     "email": "richard.sundqvist@live.se",
-    "organization": "Unit Testing Enthusiasts",
-    "namespace": "ute",
-    "project_slug": "ute-id-translation",
-    "id_translation_version": "\"~0.3.1\""
+    "organization": "Big Corporation Inc.",
+    "namespace": "big_corporation_inc",
+    "project_slug": "bci-id-translation",
+    "id_translation_version": "\"~0.4.0\""
   }
 }

@@ -1,6 +1,6 @@
 from pprint import pprint
 
-from {{cookiecutter.namespace}} import id_translation
+from big_corporation_inc import id_translation
 
 
 def test_fancy_format_string():

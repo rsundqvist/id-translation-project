@@ -6,7 +6,7 @@ import pytest
 from pathlib import Path
 from directory_tree import display_tree
 
-GENERATED_PROJECT_SLUG = "ute-id-translation"
+GENERATED_PROJECT_SLUG = "bci-id-translation"
 REPLAY_FILE = os.getenv("REPLAY_FILE", "stable")
 
 
@@ -48,5 +48,7 @@ def test_poetry_install(project_workdir):
 
 
 def test_run_tests(project_workdir):
-    result = subprocess.run(["poetry", "run", "pytest", ], stderr=subprocess.STDOUT)
+    env = os.environ.copy()
+    env["PYTEST_ADDOPTS"] = "--color=yes"
+    result = subprocess.run(["poetry", "run", "pytest", ], stderr=subprocess.STDOUT, env=env)
     assert result.returncode == 0
