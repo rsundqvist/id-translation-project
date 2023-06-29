@@ -1,8 +1,8 @@
-from typing import Optional, Dict, Any
+from typing import Any, Dict, List, Optional, Union
 
 from id_translation.mapping.types import UserOverrideFunction
 from id_translation.offline.types import FormatType
-from id_translation.types import Names, NameType, NameTypes, Translatable, SourceType, IdType
+from id_translation.types import IdType, Names, NameToSource, NameType, NameTypes, SourceType, Translatable
 
 from ._initialize import create_translator
 
@@ -11,7 +11,7 @@ SINGLETON = None
 
 def translate(
     translatable: Translatable,
-    names: NameTypes[NameType] = None,
+    names: Union[NameTypes[NameType], NameToSource[NameType, SourceType]] = None,
     ignore_names: Names[NameType] = None,
     inplace: bool = False,
     override_function: UserOverrideFunction[NameType, SourceType, IdType] = None,
@@ -26,7 +26,8 @@ def translate(
 
     Args:
         translatable: A data structure to translate.
-        names: Explicit names to translate. Derive from `translatable` if ``None``.
+        names: Explicit names to translate. Derive from `translatable` if ``None``. Alternatively, you may pass a
+            ``dict`` on the form ``{name_in_translatable: source_to_use}``.
         ignore_names: Names **not** to translate, or a predicate ``(str) -> bool``.
         inplace: If ``True``, translate in-place and return ``None``.
         override_function: A callable ``(name, fetcher.sources, ids) -> Source | None``. Returned values (except
@@ -43,15 +44,7 @@ def translate(
     Returns:
         A copy of translated copy of `translatable` if ``inplace=False``, otherwise ``None``.
     """
-    global SINGLETON
-
-    if SINGLETON is None:
-        SINGLETON = create_translator()
-    assert SINGLETON.online, "This should not happen! What did you do?"
-
-    translator = SINGLETON
-    if copy_kwargs:
-        translator = translator.copy(**copy_kwargs)
+    translator = _get_singleton(copy_kwargs)
 
     return translator.translate(
         translatable,
@@ -64,3 +57,17 @@ def translate(
         attribute=attribute,
         fmt=fmt,
     )
+
+
+def translated_names() -> List[NameType]:
+    """Return the names that were translated the most recent :func:`translate`-call."""
+    return _get_singleton({}).translated_names()
+
+
+def _get_singleton(copy_kwargs):
+    global SINGLETON
+    if SINGLETON is None:
+        SINGLETON = create_translator()
+    assert SINGLETON.online, "This should not happen! What did you do?"
+
+    return SINGLETON.copy(**copy_kwargs) if copy_kwargs else SINGLETON
