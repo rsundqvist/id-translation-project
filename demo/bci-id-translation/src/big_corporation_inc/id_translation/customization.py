@@ -1,6 +1,5 @@
 """Custom implementations may be used to change behavior in ways that TOML configuration alone does not permit."""
 import sqlalchemy
-
 from id_translation import Translator as _Translator
 from id_translation.fetching import SqlFetcher as _SqlFetcher
 

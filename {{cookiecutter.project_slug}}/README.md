@@ -4,7 +4,7 @@
 The ``{{cookiecutter.project_slug}}`` package provides pre-configured ID translation, powered by the
 **ID Translation** [![PyPI - Version](https://img.shields.io/pypi/v/id-translation.svg)](https://pypi.python.org/pypi/id-translation)
 library. This project was generated from the [id-translation-project](https://github.com/rsundqvist/id-translation-project)
-cookiecutter template on  {% now 'local', '%A, %d %b %Y' %}.
+cookiecutter template on {% now 'local', '%A, %d %b %Y' %}.
 
 For an introduction to translation, please see the **Translation primer** and **Interpreting `id-translation` Logs**
 pages: 
