@@ -4,6 +4,6 @@
   "organization": "Big Corporation Inc.",
   "namespace": "{{ cookiecutter.organization|to_namespace }}",
   "project_slug": "{{ cookiecutter.namespace|to_slug_prefix }}-id-translation",
-  "id_translation_version": "\"~0.4.0\"",
+  "id_translation_version": "\"~0.5.0\"",
   "_extensions": ["cookiecutter_extensions.to_namespace", "cookiecutter_extensions.to_slug_prefix"]
 }
