@@ -4,7 +4,7 @@
 The ``bci-id-translation`` package provides pre-configured ID translation, powered by the
 **ID Translation** [![PyPI - Version](https://img.shields.io/pypi/v/id-translation.svg)](https://pypi.python.org/pypi/id-translation)
 library. This project was generated from the [id-translation-project](https://github.com/rsundqvist/id-translation-project)
-cookiecutter template on Friday, 30 Jun 2023.
+cookiecutter template on Saturday, 01 Jul 2023.
 
 For an introduction to translation, please see the **Translation primer** and **Interpreting `id-translation` Logs**
 pages: 
@@ -47,7 +47,7 @@ You can override any pre-configured option this way. Use with care, this may bre
 # 🔧 Configuring a new project
 Basic [configuration](src/big_corporation_inc/id_translation/config) and 
 [factory methods](src/big_corporation_inc/id_translation/_initialize.py) are included, as well as some simple
-tests. Copying and adjusting the included [tests](tests/test_basics.py) is an easy way to ensure that basic connectivity
+tests. Copying and adjusting the included [tests](tests/id_translation/test_basics.py) is an easy way to ensure that basic connectivity
 and functionality is working as intended while modifying the included configuration to match your domain.
 
 You'll find links to API documentation and crash courses [near the end](#need-help) of this README.
@@ -81,10 +81,11 @@ bci-id-translation/
 │           ├── py.typed
 │           └── _translate.py
 └── tests
-    ├── conftest.py  # <-------- causes tests to fail if database is unreachable
-    ├── __init__.py
-    ├── test_basics.py
-    └── test_demo_some_things.py
+│   ├── conftest.py  # <-------- causes tests to fail if database is unreachable
+│   ├── __init__.py
+│   ├── test_basics.py
+│   └── test_demo_some_things.py
+└── verify-demo-project.sh  # <-------------------------- run me to get started!
 ```
 All commands should be executed from the `bci-id-translation` directory.
 
@@ -97,7 +98,7 @@ docker run -p 5002:5432 --rm rsundqvist/sakila-preload:postgres
 from a **new terminal window**, then run:
 
 ```bash
-poetry run pytest tests/test_basics.py
+./verify-demo-project.sh
 ```
 to execute the included tests. If the tests pass, the project has been correctly installed and the Docker database is
 up and running.  Read through the rest of this README for more information on how to adapt the template project to suit 

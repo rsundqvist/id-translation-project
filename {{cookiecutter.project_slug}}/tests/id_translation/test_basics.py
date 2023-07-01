@@ -1,6 +1,7 @@
 import pandas as pd
-from big_corporation_inc import id_translation
 from id_translation.mapping.support import enable_verbose_debug_messages
+
+from {{cookiecutter.namespace}} import id_translation
 
 DATA = pd.DataFrame(
     {

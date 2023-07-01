@@ -2,7 +2,15 @@ from typing import Any, Dict, List, Optional, Union
 
 from id_translation.mapping.types import UserOverrideFunction
 from id_translation.offline.types import FormatType
-from id_translation.types import IdType, Names, NameToSource, NameType, NameTypes, SourceType, Translatable
+from id_translation.types import (
+    IdType,
+    Names,
+    NameToSource,
+    NameType,
+    NameTypes,
+    SourceType,
+    Translatable,
+)
 
 from ._initialize import create_translator
 

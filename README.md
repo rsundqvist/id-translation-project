@@ -64,10 +64,11 @@ bci-id-translation/  # <----------------------------------------- <project_slug>
 │           ├── py.typed
 │           └── _translate.py
 └── tests
-    ├── conftest.py  # <-------- causes tests to fail if database is unreachable
-    ├── __init__.py
-    ├── test_basics.py
-    └── test_demo_some_things.py
+│   ├── conftest.py  # <-------- causes tests to fail if database is unreachable
+│   ├── __init__.py
+│   ├── test_basics.py
+│   └── test_demo_some_things.py
+└── verify-demo-project.sh  # <-------------------------- run me to get started!
 ```
 
 ## 2. Install the project development environment with Poetry

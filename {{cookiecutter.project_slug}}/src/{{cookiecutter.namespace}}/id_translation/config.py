@@ -12,7 +12,7 @@ FETCHING_CONFIGURATION_PATHS = list(_config_root.glob("fetching/*.toml"))
 CACHE_DIR = _Path.home().joinpath(".{{cookiecutter.namespace}}/id-translation/")
 """Location of the persistent ``Translator`` instance.
 
-This variable determines where the ``Translator`` instance created by 
+This variable determines where the ``Translator`` instance created by
 :func:`{{cookiecutter.namespace}}.id_translation.load_cached_translator`
 is placed. If ``Fetcher``-specific caching is used as well, this data is
 stored in ``~/.{{cookiecutter.namespace}}/id-translation/cached-fetcher-data/``.
