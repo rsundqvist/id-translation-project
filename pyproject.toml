@@ -10,7 +10,7 @@ python = "^3.11"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.3.1"
-directory-tree = "0.0.3.1"
+directory-tree = "0.0.4"
 cookiecutter = "^2.1.1"
 
 [build-system]
