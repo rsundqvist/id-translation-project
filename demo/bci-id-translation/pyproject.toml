@@ -9,7 +9,7 @@ packages = [{ include = "big_corporation_inc", from = "src" }]
 [tool.poetry.dependencies]
 python = "<4,>=3.8"
 
-id-translation = { path = "/home/dev/git/id-translation" }
+id-translation = "~0.5.0"
 
 # Database drivers.
 # psycopg2-binary = "https://pypi.org/project/psycopg2-binary/"  # Postgres driver

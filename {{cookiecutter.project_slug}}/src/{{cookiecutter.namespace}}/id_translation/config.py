@@ -1,7 +1,8 @@
 """Configuration constants."""
 from pathlib import Path as _Path
 
-from id_translation import Translator as _Translator
+from big_corporation_inc.id_translation import customization as _customization
+# from id_translation import Translator as _Translator
 
 _config_root = _Path(__file__).parent.joinpath("config/")
 
@@ -22,6 +23,6 @@ should be done with care as calls to :meth:`id_translation.Translator.store`
 does NOT invalidate the individual ``Fetcher`` caches.
 """
 
-# TRANSLATOR_IMPLEMENTATION = customization.translator.CustomTranslator
-TRANSLATOR_IMPLEMENTATION = _Translator
-"""The Translator implementation to use. There's usually little reason to change this."""
+TRANSLATOR_IMPLEMENTATION = _customization.CustomTranslator
+# TRANSLATOR_IMPLEMENTATION = _Translator  # Uncomment to use default implementation
+"""The Translator implementation to use."""

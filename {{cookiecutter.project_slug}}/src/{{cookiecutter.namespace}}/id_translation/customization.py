@@ -1,9 +1,11 @@
 """Custom implementations may be used to change behavior in ways that TOML configuration alone does not permit."""
-from typing import Any
+from typing import Optional, Set
 
 import sqlalchemy
-from id_translation import Translator as _Translator
 from id_translation.fetching import SqlFetcher as _SqlFetcher
+from id_translation.types import IdType
+
+from id_translation import Translator as _Translator
 
 
 class CustomTranslator(_Translator):
@@ -21,7 +23,7 @@ class CustomSqlFetcher(_SqlFetcher):
     """
 
     @classmethod
-    def parse_connection_string(cls, connection_string, password_key):
+    def parse_connection_string2(cls, connection_string, password_key):
         """Finalize the connection string by reading the password from AWS."""
         import json
 
@@ -30,12 +32,18 @@ class CustomSqlFetcher(_SqlFetcher):
         actual_password = json.loads(SecretCache().get_secret_string(password_key))["password"]
         return super().parse_connection_string(connection_string, actual_password)
 
-    def finalize_statement(
-        self,
-        select: sqlalchemy.sql.Select[Any],
-        id_column: sqlalchemy.Column,  # type: ignore[type-arg]
-        table: sqlalchemy.Table,
-    ) -> sqlalchemy.sql.Select[Any]:
+    @classmethod
+    def select_where(
+        cls,
+        select: sqlalchemy.sql.Select,  # type: ignore[type-arg]
+        *,
+        ids: Optional[Set[IdType]],
+        id_column: sqlalchemy.sql.ColumnElement,  # type: ignore[type-arg]
+    ) -> sqlalchemy.sql.Select:  # type: ignore[type-arg]
+        table = id_column.table
+
+        print(dir(id_column))
+
         if "enabled" in table.columns:
             column = table.columns["enabled"]
             select = select.where(column == 1)
