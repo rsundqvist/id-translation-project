@@ -11,14 +11,17 @@ A cookiecutter template backed by my [id-translation](https://github.com/rsundqv
 
 
 ## What is it?
-A template for a working starting point for creating specialized ID translation packages for an organization. For an
-example of a generated project, see this [demo project](demo/bci-id-translation). The parameters used for the demo may 
-be found [here](demo/replay.json).
+A template for a working starting point for creating specialized [íd-translation](https://pypi.org/project/id-translation/)
+packages for an organization. 
 
-The ID translation library is hosted here: https://github.com/rsundqvist/id-translation
+# Demo project
+Sample output available on GitHub.
+* 🖥️ **Code**: [demo/bci-id-translation](demo/bci-id-translation)
+* 📚 **Generated documentation**: https://rsundqvist.github.io/id-translation-project/
 
 # Quickstart
-Check out the [demo project](demo/bci-id-translation) to see what the end result might be.
+Check out the [demo project](demo/bci-id-translation) to see what the end result might be. The documentation for the
+demo project is available [here](https://rsundqvist.github.io/id-translation-project/).
 
 ## 1. Generate the project
 Install the latest version of `cookiecutter`, then generate a new `id-translation` project.
@@ -40,12 +43,14 @@ listed below.
 
 Generated project structure:
 ```bash
-bci-id-translation/  # <----------------------------------------- <project_slug>
+{{cookiecutter.project_slug}}/
+├── demo-notebook.ipynb  # <--------------------- basic usage examples (Jupyter)
 ├── pyproject.toml
 ├── pytest.ini
 ├── README.md
+├── setup-and-verify.sh  # <----------------------------- run me to get started!
 ├── src/
-│   └── big_corporation_inc/   # <---------------------------------- <namespace>
+│   └── {{cookiecutter.namespace}}/   # <--------------------------- <namespace>
 │       └── id_translation/
 │           ├── config/
 │           │   ├── fetching/  # <------------------------------ fetching config

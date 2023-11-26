@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bci-id-translation"
-version = "0.2.0"
+version = "0.1.0"
 description = "Translation of IDs found in Big Corporation Inc. databases."
 authors = ["Richard Sundqvist <richard.sundqvist@live.se>"]
 readme = "README.md"
@@ -9,11 +9,50 @@ packages = [{ include = "big_corporation_inc", from = "src" }]
 [tool.poetry.dependencies]
 python = "<4,>=3.8"
 
-id-translation = "~0.5.0"
+id-translation = { git = "https://github.com/rsundqvist/id-translation.git" }
+
+# Database drivers.
+# psycopg2-binary = "https://pypi.org/project/psycopg2-binary/"  # Postgres driver
+# pymysql = "https://pypi.org/project/pymysql/"  # MySQL/MariaDB driver
+
+# Cloud provider secrets
+# aws-secretsmanager-caching = "https://pypi.org/project/aws-secretsmanager-caching/"  # AWS secrets
+# pip install google-cloud-secret-manager = "https://pypi.org/project/google-cloud-secret-manager/"  # GCP secrets
+
+# Remote file systems
+# s3fs = "https://pypi.org/project/s3fs/"  # AWS S3, or S3-compatible storage such as MinIO
+# gcsfs = "https://pypi.org/project/gcsfs/"  # Google cloud storage
 
 [tool.poetry.group.test.dependencies]
-pytest = "^7.2.2"  #  A pure-Python PostgreSQL driver .
-pg8000 = "^1.29.2"
+pytest = "~7.4.3"
+flake8 = "~5.0.4"
+mypy = "~1.7.1"
+isort = "^5.12.0"
+black = { version = "^23.11.0", extras = ["jupyter"] }
+
+# Demo dependencies
+pg8000 = "~1.30.3"  # src/big_corporation_inc/id_translation/config/fetching/dvd-rental-store.toml
+# s3fs = "~2023.10.0"  # src/big_corporation_inc/id_translation/config/fetching/inactive/csv-files-in-s3.toml
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "~7.1.2"
+pydata-sphinx-theme = "^0.14.3"
+
+[tool.pytest.ini_options]
+filterwarnings = []
+log_file_level = 10
+log_level = 10
+log_file = "pytest.log"
+
+[tool.black]
+line_length = 120
+[tool.isort]
+profile = "black"
+[tool.mypy]
+no_implicit_optional = false
+install_types = true
+check_untyped_defs = true
+always_true = ["ID_TRANSLATION_PANDAS_IS_TYPED"]
 
 [build-system]
 requires = ["poetry-core"]

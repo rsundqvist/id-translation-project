@@ -1,9 +1,6 @@
-name: tests
+name: demo-project
 
 on:
-  schedule:
-    - cron: "0 3 1 */2 *"  # 03:00 on the first of every second
-
   workflow_dispatch:
     inputs:
       logLevel:
@@ -21,14 +18,8 @@ on:
 
 jobs:
   tests:
-    name: Replay ${{ matrix.replay-file }}
+    name: Generate and verify
     runs-on: ubuntu-latest
-    env:
-      REPLAY_FILE: ${{ matrix.replay-file }}
-    strategy:
-      fail-fast: false
-      matrix:
-        replay-file: [ "stable", "default", "master" ]
     steps:
       - uses: actions/checkout@v3
 
@@ -43,16 +34,23 @@ jobs:
 
       - name: Install system deps
         shell: bash
-        run: |
-          pip install poetry --quiet
-          poetry install
-          poetry run pip list
-      - name: Lint
+        run: pip install poetry cookiecutter
+
+      - name: Generate project
+        shell: bash
+        run: cookiecutter . --replay-file tests/replay/master -o output
+
+      - name: Run demo project
         shell: bash
         run: |
-          poetry run dev/lint.sh
-      - name: Run tests
-        shell: bash
-        run: |
-          echo "REPLAY_FILE=$REPLAY_FILE"
-          poetry run pytest --color=yes tests/
+          cd output/bci-id-translation
+          ./setup-and-verify.sh
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        with:
+          publish_branch: gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: output/bci-id-translation/docs/_build/
+          force_orphan: true

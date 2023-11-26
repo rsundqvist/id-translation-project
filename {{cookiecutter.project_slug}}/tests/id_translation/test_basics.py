@@ -3,13 +3,12 @@ from id_translation.mapping.support import enable_verbose_debug_messages
 
 from {{cookiecutter.namespace}} import id_translation
 
-
 DATA = pd.DataFrame(
     {
         "category_id": [1, 2],
         "country_id": [1, 2],
         "customer_id": [1, 2],
-        # Should not be translated!
+        # Below should not be translated.
         "session_id": [123113, 3213213],
         "date": [pd.Timestamp("2019-05-11"), pd.Timestamp("2019-05-11")],
     }
@@ -20,9 +19,7 @@ EXPECTED = pd.DataFrame(
         "category_id": ["1:Action", "2:Animation"],
         "country_id": ["1:Afghanistan", "2:Algeria"],
         "customer_id": ["1:MARY", "2:PATRICIA"],
-        # Should not be translated!
-        "session_id": [123113, 3213213],
-        "date": [pd.Timestamp("2019-05-11"), pd.Timestamp("2019-05-11")],
+        **DATA[["session_id", "date"]],
     }
 )
 
@@ -56,11 +53,14 @@ def test_load_cached_translator(tmp_path):
 
 def test_override_only(monkeypatch):
     """Contains all configuration which is not specific to a single fetcher."""
+    from id_translation.fetching import SqlFetcher
+
     from {{cookiecutter.namespace}}.id_translation import config
 
-    onverride_only = config._config_root / "fetching/inactive/override-only.toml"
-    monkeypatch.setattr(config, "FETCHING_CONFIGURATION_PATHS", [onverride_only])
+    override_only = config._config_root / "fetching/inactive/override-only.toml"
+    monkeypatch.setattr(config, "FETCHING_CONFIGURATION_PATHS", [override_only])
     translator = id_translation.create_translator()
+    assert isinstance(translator.fetcher, SqlFetcher)
     assert translator.fetcher.mapper._score.__name__ == "disabled"
     actual = translator.translate(DATA)
     pd.testing.assert_frame_equal(EXPECTED, actual)

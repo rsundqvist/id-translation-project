@@ -7,12 +7,13 @@
 # https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.fetching.html#id_translation.fetching.AbstractFetcher
 # https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.fetching.html#id_translation.fetching.PandasFetcher
 #
-read_function = "read_csv"  # Unqualified names read from the 'pandas' namespace.
-read_path_format = "s3://path/to/bucket/{source}.csv"  # The 'source' must be present.
-online = false  # Set online=true to make the Translator more conservative, saving money on data transfer fees.
+read_function = "read_csv"  # Unqualified names must belong to the 'pandas' namespace.
+read_path_format = "s3://<bucket>/id-translation/data/{}.csv"
 
-[fetching.PandasFetcher.read_function_kwargs]  # Passed as-is to the chosen read-function.
-storage_options = { key = "<AWS_ACCESS_KEY_ID>", secret = "<AWS_SECRET_ACCESS_KEY>", token = "<AWS_SESSION_TOKEN>" }
+[fetching.PandasFetcher.read_function_kwargs.storage_options]
+key = "minioadmin"
+secret = "minioadmin"
+client_kwargs = { endpoint_url = "http://localhost:9000" }
 
 # ------------------------------------------------------------------------------
 # AbstractFetcher configuration.

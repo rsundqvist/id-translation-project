@@ -43,12 +43,12 @@ def test_display_tree(project_workdir):
 
 
 def test_poetry_install(project_workdir):
-    result = subprocess.run(["poetry", "install", ], stderr=subprocess.STDOUT)
+    result = subprocess.run(["poetry", "install"], stderr=subprocess.STDOUT)
     assert result.returncode == 0
 
 
 def test_run_tests(project_workdir):
     env = os.environ.copy()
     env["PYTEST_ADDOPTS"] = "--color=yes"
-    result = subprocess.run(["poetry", "run", "pytest", ], stderr=subprocess.STDOUT, env=env)
+    result = subprocess.run(["poetry", "run", "pytest"], stderr=subprocess.STDOUT, env=env)
     assert result.returncode == 0
