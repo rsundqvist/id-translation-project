@@ -1,0 +1,10 @@
+{
+  "cookiecutter": {
+    "full_name": "Richard Sundqvist",
+    "email": "richard.sundqvist@live.se",
+    "organization": "Big Corporation Inc.",
+    "namespace": "big_corporation_inc",
+    "project_slug": "bci-id-translation",
+    "id_translation_version": "{ path = \"/home/dev/git/id-translation\" }"
+  }
+}

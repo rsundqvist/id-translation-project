@@ -1,0 +1,47 @@
+name: demo-project
+
+on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: "Log level"
+        required: true
+        default: "info"
+      tags:
+        required: false
+        description: "Test scenario tags"
+  push:
+    branches:
+     - master
+  pull_request:
+    branches:
+
+jobs:
+  tests:
+    name: Generate and verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Start Docker database
+        shell: bash
+        run: docker run -d -p 5002:5432 rsundqvist/sakila-preload:postgres
+
+      - name: Install system deps
+        shell: bash
+        run: pip install poetry cookiecutter
+
+      - name: Generate project
+        shell: bash
+        run: cookiecutter . --replay-file tests/replay/master -o output
+
+      - name: Run demo project
+        shell: bash
+        run: |
+          cd output/bci-id-translation
+          ./setup-and-verify.sh

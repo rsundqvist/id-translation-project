@@ -1,7 +1,25 @@
 """Configuration constants."""
+import typing as _t
 from pathlib import Path as _Path
+from uuid import UUID as _UUID
 
 from id_translation import Translator as _Translator
+
+# from id_translation import types as _tt
+
+# from {{cookiecutter.namespace}}.id_translation import customization as _customization
+
+# IdType = _tt.IdTypes  # TODO(3.8, 3.9, 3.10) or 1.0.0
+IdType = _t.Union[int, str, _UUID]
+"""The kind of IDs we wish to translate."""
+NameType: _t.TypeAlias = str
+"""Type of names we wish to translate, such as a pandas.Dataframe column name."""
+SourceType: _t.TypeAlias = NameType
+"""Name types for sources, such as SQL table names."""
+
+# TRANSLATOR_TYPE = _customization.StandardTranslator  # Uncomment to use custom implementation
+TRANSLATOR_TYPE = _Translator[NameType, SourceType, IdType]
+"""The Translator implementation to use."""
 
 _config_root = _Path(__file__).parent.joinpath("config/")
 
@@ -12,7 +30,7 @@ FETCHING_CONFIGURATION_PATHS = list(_config_root.glob("fetching/*.toml"))
 CACHE_DIR = _Path.home().joinpath(".{{cookiecutter.namespace}}/id-translation/")
 """Location of the persistent ``Translator`` instance.
 
-This variable determines where the ``Translator`` instance created by 
+This variable determines where the ``Translator`` instance created by
 :func:`{{cookiecutter.namespace}}.id_translation.load_cached_translator`
 is placed. If ``Fetcher``-specific caching is used as well, this data is
 stored in ``~/.{{cookiecutter.namespace}}/id-translation/cached-fetcher-data/``.
@@ -21,7 +39,3 @@ Combining ``Translator`` and ``Fetcher`` caching has its use cases, but
 should be done with care as calls to :meth:`id_translation.Translator.store`
 does NOT invalidate the individual ``Fetcher`` caches.
 """
-
-# TRANSLATOR_IMPLEMENTATION = customization.translator.CustomTranslator
-TRANSLATOR_IMPLEMENTATION = _Translator
-"""The Translator implementation to use. There's usually little reason to change this."""

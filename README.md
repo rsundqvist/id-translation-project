@@ -11,19 +11,45 @@ A cookiecutter template backed by my [id-translation](https://github.com/rsundqv
 
 
 ## What is it?
-A template for a working starting point for creating specialized ID translation packages for an organization. For an
-example of a generated project, see this [demo project](demo/bci-id-translation). The parameters used for the demo may 
-be found [here](demo/replay.json).
+A template for a working starting point for creating specialized [íd-translation](https://pypi.org/project/id-translation/)
+packages for an organization. 
 
-The ID translation library is hosted here: https://github.com/rsundqvist/id-translation
+# Demo project
+Sample output available on GitHub.
+* 🖥️ **Code**: [demo/bci-id-translation](demo/bci-id-translation)
+* 📚 **Generated documentation**: https://rsundqvist.github.io/id-translation-project/
 
 # Quickstart
-Check out the [demo project](demo/bci-id-translation) to see what the end result might be.
+You will need...
+* [cookiecutter](https://pypi.org/project/cookiecutter/) to generate the project,
+* [Poetry](https://python-poetry.org/docs/#installing-with-the-official-installer) to install the project, and
+* [Docker](https://www.docker.com/products/docker-desktop/) to run the included tests.
+
+Everything else should be installed for when running `poetry install`. Steps:
+1. Generate project
+   ```bash
+   cookiecutter https://github.com/rsundqvist/id-translation-project.git
+   ```
+2. Start test database (separate window)
+   ```bash
+   docker run -p 5002:5432 --rm rsundqvist/sakila-preload:postgres
+   ```
+3. Run the included script
+   ```bash
+   cd <project_slug>
+   ./setup-and-verify.sh
+   ```
+
+The `setup-and-generate.sh` script will:
+1. Lint the generated project (`flake8`, `black`, `isort`)
+2. Run the included unit tests against the test database (`pytest`).
+3. Run static type checking (`mypy`).
+4. Generate documentation for the new project (`sphinx`).
 
 ## 1. Generate the project
-Install the latest version of `cookiecutter`, then generate a new `id-translation` project.
+
+Install the latest version of `cookiecutter`. then generate a new `id-translation` project.
 ```bash
-pip install -U cookiecutter
 cookiecutter https://github.com/rsundqvist/id-translation-project.git
 ```
 Cookiecutter will ask you for a few inputs. You can use the defaults for most of them. The most important ones are
@@ -37,38 +63,6 @@ listed below.
 | id_translation_version | Version of the [id-translation](https://github.com/rsundqvist/id-translation) package.         |
 
 ❗ Subsequent steps will assume that **defaults were used** for all Cookiecutter prompts.
-
-Generated project structure:
-```bash
-bci-id-translation/  # <----------------------------------------- <project_slug>
-├── pyproject.toml
-├── pytest.ini
-├── README.md
-├── src/
-│   └── big_corporation_inc/   # <---------------------------------- <namespace>
-│       └── id_translation/
-│           ├── config/
-│           │   ├── fetching/  # <------------------------------ fetching config
-│           │   │   ├── dvd-rental-store.toml
-│           │   │   ├── geography.toml
-│           │   │   └── inactive/
-│           │   │       ├── csv-files-in-s3.toml  # <-------- fetching from file
-│           │   │       ├── override-only.toml  # <- alternative fetching config
-│           │   │       └── README.txt
-│           │   ├── main.toml  # <---------------------- main translation config
-│           │   └── metaconf.toml
-│           ├── config.py  # <-------- you might want to change config.CACHE_DIR
-│           ├── customization.py  # <---------- optional specialization examples
-│           ├── _initialize.py
-│           ├── __init__.py
-│           ├── py.typed
-│           └── _translate.py
-└── tests
-    ├── conftest.py  # <-------- causes tests to fail if database is unreachable
-    ├── __init__.py
-    ├── test_basics.py
-    └── test_demo_some_things.py
-```
 
 ## 2. Install the project development environment with Poetry
 ❗ If you don't have Poetry installed, you can get it here: https://python-poetry.org/docs/#installation

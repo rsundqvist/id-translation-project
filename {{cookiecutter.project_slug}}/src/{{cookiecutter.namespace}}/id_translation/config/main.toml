@@ -1,24 +1,16 @@
 # Configuration for translation of IDs found in {{cookiecutter.organization}} databases."
 #
-# Home page:
+# Documentation
 # * https://id-translation.readthedocs.io
-#
-# Overview/crash course pages:
-# * https://id-translation.readthedocs.io/en/stable/documentation/translation-primer.html
-# * https://id-translation.readthedocs.io/en/stable/documentation/mapping-primer.html
 # * https://id-translation.readthedocs.io/en/stable/documentation/translator-config.html
-#
-# API documentation:
-# * The Translator class and the Translate.translate()-method, which is the main entry point for ID translation tasks.
-#   - https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.html#id_translation.Translator
-#   - https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.html#id_translation.Translator.translate
+# * https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.Translator.translate.html
 #
 ########################################################################################################################
 [translator]
 fmt = "{id}:{name}"
-enable_uuid_heuristics = false  # Enable if your UUIDs are not being translated.
+enable_uuid_heuristics = false  # Enabling may improve matching especially for  SQLAlchemy < 2
 [unknown_ids]
-fmt = "<Failed: {id!r}>"
+fmt = "<Failed: id={id!r}>"
 
 # ------------------------------------------------------------------------------
 # Name-to-source mapping configuration. Binds names to source, eg 'animal_id'

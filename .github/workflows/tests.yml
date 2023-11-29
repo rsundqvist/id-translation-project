@@ -46,9 +46,13 @@ jobs:
         run: |
           pip install poetry --quiet
           poetry install
+          poetry run pip list
+      - name: Lint
+        shell: bash
+        run: |
+          poetry run dev/lint.sh
       - name: Run tests
         shell: bash
         run: |
           echo "REPLAY_FILE=$REPLAY_FILE"
           poetry run pytest --color=yes tests/
-          poetry run pip list
