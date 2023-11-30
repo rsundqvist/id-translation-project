@@ -1,3 +1,4 @@
+import logging
 import typing as t
 
 from .. import config
@@ -27,6 +28,9 @@ def get_singleton(*, recreate: bool = False) -> config.TRANSLATOR_TYPE:
             INSTANCE.fetcher.close()
         except ConnectionStatusError:
             pass
+
+        INSTANCE = None
+        logging.getLogger(__package__).info("Singleton reset.")
 
     if INSTANCE is None:
         INSTANCE = create_translator()
