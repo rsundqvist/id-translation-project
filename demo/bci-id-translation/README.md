@@ -4,7 +4,7 @@
 The ``bci-id-translation`` package provides pre-configured ID translation, powered by the
 **ID Translation** [![PyPI - Version](https://img.shields.io/pypi/v/id-translation.svg)](https://pypi.python.org/pypi/id-translation)
 library. This project was generated from the [id-translation-project](https://github.com/rsundqvist/id-translation-project)
-cookiecutter template on Wednesday, 29 Nov 2023.
+cookiecutter template on Saturday, 09 Dec 2023.
 
 # 🔧 Quickstart 🚀
 Start the test database:
