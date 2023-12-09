@@ -14,6 +14,6 @@ def load_cached_translator(max_age: str = "12h") -> config.TRANSLATOR_TYPE:
     return config.TRANSLATOR_TYPE.load_persistent_instance(
         config_path=config.MAIN_CONFIGURATION_PATH,
         extra_fetchers=config.FETCHING_CONFIGURATION_PATHS,
-        cache_dir=config.CACHE_DIR,
+        cache_dir=config.TRANSLATOR_CACHE_DIR,
         max_age=max_age,
     )

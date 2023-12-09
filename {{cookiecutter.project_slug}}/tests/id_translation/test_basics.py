@@ -44,8 +44,8 @@ def test_create_translator():
     pd.testing.assert_frame_equal(EXPECTED, actual)
 
 
-def test_load_cached_translator(tmp_path):
-    id_translation.config.CACHE_DIR = tmp_path
+def test_load_cached_translator(tmp_path, monkeypatch):
+    monkeypatch.setattr(id_translation.config, "TRANSLATOR_CACHE_DIR", tmp_path)
     translator = id_translation.load_cached_translator()
     actual = translator.translate(DATA)
     pd.testing.assert_frame_equal(EXPECTED, actual)
