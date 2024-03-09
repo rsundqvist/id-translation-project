@@ -16,12 +16,12 @@ Translation of IDs found in **Big Corporation Inc.** databases.
 
    See docs for the backing API for additional help:  https://id-translation.readthedocs.io/
 
-This documentation was generated from the https://github.com/rsundqvist/id-translation-project on Saturday, 09 Dec 2023,
+This documentation was generated from the https://github.com/rsundqvist/id-translation-project on Saturday, 09 Mar 2024,
 a cookiecutter template template for the https://github.com/rsundqvist/id-translation package suite.
 
 Example
 -------
-Using :func:`big_corporation_inc.id_translation.singleton.translate` with a temporary translation
+Using :func:`~big_corporation_inc.id_translation.singleton.translate` with a temporary translation
 :class:`~id_translation.offline.Format`. Input file: :download:`transactions.csv`.
 
 .. literalinclude:: example.py
