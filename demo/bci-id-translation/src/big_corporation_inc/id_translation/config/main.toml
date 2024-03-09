@@ -8,7 +8,7 @@
 ########################################################################################################################
 [translator]
 fmt = "{id}:{name}"
-enable_uuid_heuristics = false  # Enabling may improve matching especially for  SQLAlchemy < 2
+enable_uuid_heuristics = false  # Enabling may improve matching especially for SQLAlchemy < 2
 [unknown_ids]
 fmt = "<Failed: id={id!r}>"
 
@@ -38,7 +38,7 @@ regex = ".*_id$"
 remove = false  # This is the default (like the built-in filter).
 [[translator.mapping.filter_functions]]
 function = "filter_names"
-regex = "session|query"  # A card ID is not translatable; we probably want the card holder (handled below).
+regex = "session|query"
 remove = true
 
 # ------------------------------------------------------------------------------
@@ -51,9 +51,9 @@ target_candidate = "humans"
 [[translator.mapping.score_function_heuristics]]
 function = "like_database_table"
 mutate = true  # Keep this heuristic for the next heuristic function(s)
-[[translator.mapping.score_function_heuristics]]  # For tables with a prefix, eg all_animals instead of just animals
+[[translator.mapping.score_function_heuristics]]  # For tables with a prefix, e.g. all_animals instead of just animals
 function = "value_fstring_alias"
-fstring = "all{value}"  # We should not add '_' here, since like_database_table removes them.
+fstring = "all{value}"  # We should not add '_' here, since like_database_table (with mutate=True) removes them.
 
 # ------------------------------------------------------------------------------
 # Manual name-to-source mapping. Use for mappings that are difficult or

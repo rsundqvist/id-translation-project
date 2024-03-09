@@ -21,7 +21,7 @@ a cookiecutter template template for the https://github.com/rsundqvist/id-transl
 
 Example
 -------
-Using :func:`{{cookiecutter.namespace}}.id_translation.singleton.translate` with a temporary translation
+Using :func:`~{{cookiecutter.namespace}}.id_translation.singleton.translate` with a temporary translation
 :class:`~id_translation.offline.Format`. Input file: :download:`transactions.csv`.
 
 .. literalinclude:: example.py
