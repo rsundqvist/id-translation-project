@@ -7,7 +7,7 @@ readme = "README.md"
 packages = [{ include = "{{cookiecutter.namespace}}", from = "src" }]
 
 [tool.poetry.dependencies]
-python = "<4,>=3.8"
+python = "<4,>=3.11"
 
 id-translation = {{cookiecutter.id_translation_version}}
 
@@ -24,19 +24,17 @@ id-translation = {{cookiecutter.id_translation_version}}
 # gcsfs = "https://pypi.org/project/gcsfs/"  # Google cloud storage
 
 [tool.poetry.group.test.dependencies]
-pytest = "~7.4.3"
-flake8 = "~5.0.4"
-mypy = "~1.7.1"
-isort = "^5.12.0"
-black = { version = "^23.11.0", extras = ["jupyter"] }
+pytest = "^8.1.1"
+ruff = "^0.3.4"
+mypy = "~1.9.0"
 
 # Demo dependencies
-pg8000 = "~1.30.3"  # src/{{cookiecutter.namespace}}/id_translation/config/fetching/dvd-rental-store.toml
-# s3fs = "~2023.10.0"  # src/{{cookiecutter.namespace}}/id_translation/config/fetching/inactive/csv-files-in-s3.toml
+pg8000 = "~1.30.5"  # src/{{cookiecutter.namespace}}/id_translation/config/fetching/dvd-rental-store.toml
+# s3fs = "~2024.3.1"  # src/{{cookiecutter.namespace}}/id_translation/config/fetching/inactive/csv-files-in-s3.toml
 
 [tool.poetry.group.docs.dependencies]
-sphinx = "~7.1.2"
-pydata-sphinx-theme = "^0.14.3"
+sphinx = "~7.2.6"
+pydata-sphinx-theme = "^0.15.2"
 
 [tool.pytest.ini_options]
 filterwarnings = []
@@ -44,10 +42,13 @@ log_file_level = 10
 log_level = 10
 log_file = "pytest.log"
 
-[tool.black]
-line_length = 120
-[tool.isort]
-profile = "black"
+[tool.ruff]
+line-length = 120
+fix = true
+
+[tool.ruff.lint.pycodestyle]
+max-line-length = 150
+
 [tool.mypy]
 no_implicit_optional = false
 install_types = true

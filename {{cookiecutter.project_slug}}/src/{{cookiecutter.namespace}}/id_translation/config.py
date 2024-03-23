@@ -1,4 +1,5 @@
 """Configuration constants."""
+
 import typing as _t
 from pathlib import Path as _Path
 from uuid import UUID as _UUID
@@ -10,8 +11,8 @@ from id_translation import fetching as _fetching
 
 # from {{cookiecutter.namespace}}.id_translation import customization as _customization
 
-# IdType = _tt.IdTypes  # TODO(3.8, 3.9, 3.10) or 1.0.0
-IdType = _t.Union[int, str, _UUID]
+
+IdType = int | str | _UUID
 """The kind of IDs we wish to translate."""
 NameType: _t.TypeAlias = str
 """Type of names we wish to translate, such as a pandas.Dataframe column name."""
