@@ -10,16 +10,16 @@ poetry lock && poetry install
 source "$(poetry env info --path)/bin/activate"
 
 echo "--------------------------------------------------------------------------"
-echo "-- STEP 2/6: Format with 'black' and 'isort' -----------------------------"
-black src/ tests/ && isort src/ tests/
+echo "-- STEP 2/6: Format with 'ruff' ------------------------------------------"
+ruff format src/ tests/
 
 echo "--------------------------------------------------------------------------"
 echo "-- STEP 3/6: Test with 'pytest' ------------------------------------------"
 pytest tests/
 
 echo "--------------------------------------------------------------------------"
-echo "-- STEP 4/6: Lint with 'flake8' ------------------------------------------"
-flake8 src/ tests/ --ignore=E501  # Black enforces line lengths
+echo "-- STEP 4/6: Lint with 'ruff' --------------------------------------------"
+ruff check src/ tests/
 
 echo "--------------------------------------------------------------------------"
 echo "-- STEP 5/6: Check types with 'mypy' -------------------------------------"
