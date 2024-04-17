@@ -1,19 +1,18 @@
 [tool.poetry]
 name = "id-translation-project"
-version = "0.1.0"
+version = "0.0.0"
 description = "A cookiecutter for creating specialized ID translation packages."
 authors = ["Richard Sundqvist <richard.sundqvist@live.se>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "~3.12"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.1.1"
-ruff = "^0.3.4"
-black = { version = "^23.11.0", extras = ["jupyter"] }
+pytest = "~8.1.1"
+ruff = "~0.3.7"
 directory-tree = "==0.0.4"
-cookiecutter = "^2.6.0"
+cookiecutter = "~2.6.0"
 
 [build-system]
 requires = ["poetry-core"]
