@@ -160,9 +160,27 @@ will use `your_function` defined in [customization.py](src/ute/id_translation/cu
 for details. The `(value, candidates, context)`-arguments are given by the `Mapper` and should not be specified in
 configuration. Custom Score and Filter functions may be defined in the same way.
 
+## 🔧 Integrations / Translating more types
+By default, all `Translator` instances can translate the "standard" built-in collections, as well as `pandas` and 
+`numpy` types.
+
+To enable translation for more types, there a few possible approaches:
+
+1. Use one of the [included-but-optional integrations](https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.dio.integration.html)
+   that are shipped with the `id-translation` package.   
+2. Build your own integration by inheriting from
+   [DataStructureIO](https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.dio.html#id_translation.dio.DataStructureIO)
+   (don't forget to override the `DataStructureIO.names()`-implementation).
+3. Write a helper method. Consider using a [TranslationHelper](https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.utils.translation_helper.html)
+   to allow users to how exactly the `Translator.translate()`-method should be called.   
+
+Both included-but-optional and user-built integrations must be registered - see the
+[DataStructureIO.register()](https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.dio.html#id_translation.dio.DataStructureIO.register)
+method.
+
 # Need help?
-This section contains links to **ID Translation** project documentation. If nothing else works, you can  always ask a
-question or report an issue on Github:
+This section contains links to **ID Translation** project documentation. If nothing else works, you can always ask a
+question or report an issue on GitHub:
 
 * https://github.com/rsundqvist/id-translation-project/issues/new
 

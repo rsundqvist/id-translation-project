@@ -1,4 +1,5 @@
 """Custom implementations may be used to change behavior in ways that TOML configuration alone does not permit."""
+
 from typing import Self
 
 import sqlalchemy
