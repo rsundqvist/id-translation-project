@@ -25,7 +25,7 @@ include_views = false  # This is the default
 #
 # https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.fetching.html#id_translation.fetching.AbstractFetcher
 selective_fetch_all = true
-fetch_all_cache_max_age = "0d"  # No fetcher-specific cache (default).
+concurrent_operation_action = "ignore"  # Allow simultaneous access across threads.
 
 # ------------------------------------------------------------------------------
 # Placeholder mapping configuration. Binds actual names in sources (such as

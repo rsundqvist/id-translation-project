@@ -11,7 +11,7 @@ A cookiecutter template backed by my [id-translation](https://github.com/rsundqv
 
 
 ## What is it?
-A template for a working starting point for creating specialized [íd-translation](https://pypi.org/project/id-translation/)
+A template for a working starting point for creating specialized [id-translation](https://pypi.org/project/id-translation/)
 packages for an organization. 
 
 # Demo project

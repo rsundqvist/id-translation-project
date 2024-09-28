@@ -5,7 +5,6 @@ from pathlib import Path as _Path
 from uuid import UUID as _UUID
 
 from id_translation import Translator as _Translator
-from id_translation import fetching as _fetching
 
 # from id_translation import types as _tt
 
@@ -47,9 +46,3 @@ TRANSLATOR_CACHE_DIR = BASE_CACHE_DIR / "translator"
 
    :func:`big_corporation_inc.id_translation.load_cached_translator`.
 """
-FETCHER_CACHE_DIR = BASE_CACHE_DIR / "fetcher-data"
-"""Location where cached ``Fetcher`` data is stored.
-
-To clear the cache, use :meth:`id_translation.fetching.CacheAccess.clear_all_cache_data`.
-"""
-_fetching.CacheAccess.BASE_CACHE_PATH = FETCHER_CACHE_DIR
