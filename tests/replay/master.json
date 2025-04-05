@@ -5,6 +5,6 @@
     "organization": "Big Corporation Inc.",
     "namespace": "big_corporation_inc",
     "project_slug": "bci-id-translation",
-    "id_translation_version": "{ git = \"https://github.com/rsundqvist/id-translation.git\" }"
+    "id_translation_version": "@ git+https://github.com/rsundqvist/id-translation.git"
   }
 }

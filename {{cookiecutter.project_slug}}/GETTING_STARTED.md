@@ -18,7 +18,7 @@ Generated documentation example:
    ```
 
 The `setup-and-generate.sh` script will:
-1. Lint the generated project (`flake8`, `black`, `isort`).
+1. Lint the generated project (`ruff`).
 2. Run the included unit tests against the test database (`pytest`).
 3. Run static type checking (`mypy`).
 4. Generate documentation for the new project (`sphinx`).
@@ -132,9 +132,9 @@ for a limited but working example.
 
 ## 🔧 Non-SQL translation sources
 It's possible to simply enumerate translations manually using
-a [MemoryFetcher](https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.fetching.html#id_translation.fetching.MemoryFetcher),
+a [MemoryFetcher](https://id-translation.readthedocs.io/en/stable/api/id_translation.fetching.html#id_translation.fetching.MemoryFetcher),
 or read them from a file. Pretty much any format and location type that can be read by Pandas is supported, including 
-for example S3 (additional dependencies required). See the [PandasFetcher](https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.fetching.html#id_translation.fetching.PandasFetcher)
+for example S3 (additional dependencies required). See the [PandasFetcher](https://id-translation.readthedocs.io/en/stable/api/id_translation.fetching.html#id_translation.fetching.PandasFetcher)
 documentation for details.
 
 An example using CSV files stored in S3 can be found in
@@ -153,35 +153,40 @@ fully qualified path as the `function`-argument, e.g.
 
 will use `your_function` defined in [customization.py](src/ute/id_translation/customization.py), and will pass
 `do_a_good_job=True` whenever it is called. These functions must have the correct signature, see
-
-- https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.types.html#id_translation.mapping.types.AliasFunction
-- https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.types.html#id_translation.mapping.types.FilterFunction
+- https://id-translation.readthedocs.io/en/stable/api/id_translation.mapping.types.html#id_translation.mapping.types.AliasFunction
+- https://id-translation.readthedocs.io/en/stable/api/id_translation.mapping.types.html#id_translation.mapping.types.FilterFunction
 
 for details. The `(value, candidates, context)`-arguments are given by the `Mapper` and should not be specified in
 configuration. Custom Score and Filter functions may be defined in the same way.
 
-## 🔧 Integrations / Translating more types
+## 🔧 Extensions
+Adjust the template to fit your needs.
+
+### Translating more types
 By default, all `Translator` instances can translate the "standard" built-in collections, as well as `pandas` and 
-`numpy` types.
+`numpy` types. If `polars` or `dask` are installed, integrations for these libraries are loaded automatically.
 
-To enable translation for more types, there a few possible approaches:
+You may also build own `DataStructureIO` implementation to create a [user-defined integration] for your package.
 
-1. Use one of the [included-but-optional integrations](https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.dio.integration.html)
-   that are shipped with the `id-translation` package.   
-2. Build your own integration by inheriting from
-   [DataStructureIO](https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.dio.html#id_translation.dio.DataStructureIO)
-   (don't forget to override the `DataStructureIO.names()`-implementation).
-3. Write a helper method. Consider using a [TranslationHelper](https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.utils.translation_helper.html)
-   to allow users to how exactly the `Translator.translate()`-method should be called.   
+### Handling `translate` arguments from users
+The `TranslationHelper` is a utility class for managing how the `Translator.translate()`-method is called in
+applications. For example, you might want to provide sane defaults a function that creates a report, while still 
+allowing users to make limited adjustments.
 
-Both included-but-optional and user-built integrations must be registered - see the
-[DataStructureIO.register()](https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.dio.html#id_translation.dio.DataStructureIO.register)
-method.
+See the [documentation][TranslationHelper] for an example of how the ``TranslationHelper`` can help accomplish this task.
+
+[TranslationHelper]: https://id-translation.readthedocs.io/en/stable/api/id_translation.utils.translation_helper.html
+
+### Applying transformations
+The `Transformer` interface is useful when the handling things like composite fields, e.g. bitmasks. The built-in
+[BitmaskTransformer] may be configured on a per-source basis to allow the `Translator` to handle data which would
+otherwise by difficult to process. The interface is generic and may be extended for arbitrary tasks.
+
+[BitmaskTransformer]: https://id-translation.readthedocs.io/en/stable/api/id_translation.transform.html#id_translation.transform.BitmaskTransformer
 
 # Need help?
 This section contains links to **ID Translation** project documentation. If nothing else works, you can always ask a
 question or report an issue on GitHub:
-
 * https://github.com/rsundqvist/id-translation-project/issues/new
 
 ## Home page
@@ -193,33 +198,27 @@ question or report an issue on GitHub:
 
 ## TOML configuration files
 Documentation of the config format. Click [here](src/{{cookiecutter.namespace}}/id_translation/config/) to go to yours.
-
 * https://id-translation.readthedocs.io/en/stable/documentation/translator-config.html
 
 ## Logging
 For help interpreting the logs emitted during ID translation, see the **Interpreting `id-translation` Logs**-page.
-
 * https://id-translation.readthedocs.io/en/stable/documentation/translation-logging.html
 
 ## API documentation
 * The `Translator` class and the `Translate.translate()`-method, which is the main entry point for ID translation tasks.
-    - https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.Translator.html
-    - https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.Translator.translate.html
-
+    - https://id-translation.readthedocs.io/en/stable/api/id_translation.Translator.html
+    - https://id-translation.readthedocs.io/en/stable/api/id_translation.Translator.translate.html
 
 * The `Mapper` class is responsible for turning "the names you want" into "the names you have". You'll rarely need to
   do this yourself; the `Translator` and `AbstractFetcher` classes will call `Mapper.apply()` for you when they need it.
   Configuration for this class is found in the `[*.fetching]`-subsections.
-
-    - https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.html#id_translation.mapping.Mapper
-    - https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.html#id_translation.mapping.Mapper.apply
+    - https://id-translation.readthedocs.io/en/stable/api/id_translation.mapping.html#id_translation.mapping.Mapper
+    - https://id-translation.readthedocs.io/en/stable/api/id_translation.mapping.html#id_translation.mapping.Mapper.apply
 
 
 * There are a number of functions heuristics, filtering, and short-circuiting (a repurposed filter-function) that are
   included with the library.
-
-    - https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.filter_functions.html
-    - https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.heuristic_functions.html
-
+    - https://id-translation.readthedocs.io/en/stable/api/id_translation.mapping.filter_functions.html
+    - https://id-translation.readthedocs.io/en/stable/api/id_translation.mapping.heuristic_functions.html
   These are configured in `[[*.mapping.filter_functions]]` and `[[*.mapping.score_function_heuristics]]`
   list-subsections.

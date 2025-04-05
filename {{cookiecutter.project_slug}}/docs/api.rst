@@ -1,5 +1,5 @@
 .. autosummary::
-   :toctree: _autosummary
+   :toctree: api
    :recursive:
 
    {{cookiecutter.namespace}}.id_translation.singleton

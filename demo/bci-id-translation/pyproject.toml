@@ -1,32 +1,32 @@
-[tool.poetry]
+[project]
 name = "bci-id-translation"
 version = "0.1.0"
 description = "Translation of IDs found in Big Corporation Inc. databases."
-authors = ["Richard Sundqvist <richard.sundqvist@live.se>"]
+authors = [
+    { name = "Richard Sundqvist", email = "richard.sundqvist@live.se" },
+]
 readme = "README.md"
-packages = [{ include = "big_corporation_inc", from = "src" }]
 
-[tool.poetry.dependencies]
-python = "<4,>=3.11"
+requires-python = ">=3.11"
+dependencies = [
+    "id-translation ",
+]
 
-id-translation = { git = "https://github.com/rsundqvist/id-translation.git" }
 
-# Database drivers.
-# psycopg2-binary = "https://pypi.org/project/psycopg2-binary/"  # Postgres driver
-# pymysql = "https://pypi.org/project/pymysql/"  # MySQL/MariaDB driver
+[project.entry-points."id_translation.dio"]
+# See https://id-translation.readthedocs.io/en/stable/api/id_translation.dio.html#user-defined-integrations
+# name_doesnt_matter = "big_corporation_inc.id_translation.submodule:MyDataStructureIO"
 
-# Cloud provider secrets
-# aws-secretsmanager-caching = "https://pypi.org/project/aws-secretsmanager-caching/"  # AWS secrets
-# pip install google-cloud-secret-manager = "https://pypi.org/project/google-cloud-secret-manager/"  # GCP secrets
+[tool.poetry]
 
-# Remote file systems
-# s3fs = "https://pypi.org/project/s3fs/"  # AWS S3, or S3-compatible storage such as MinIO
-# gcsfs = "https://pypi.org/project/gcsfs/"  # Google cloud storage
+packages = [
+    { include = "big_corporation_inc", from = "src" }
+]
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.1.1"
-ruff = "^0.3.4"
-mypy = "~1.9.0"
+mypy = "~1.15.0"
+ruff = "~0.11.3"
 
 # Demo dependencies
 pg8000 = "~1.30.5"  # src/big_corporation_inc/id_translation/config/fetching/dvd-rental-store.toml

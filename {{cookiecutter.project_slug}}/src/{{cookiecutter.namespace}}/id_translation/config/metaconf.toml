@@ -9,3 +9,7 @@
 allow_interpolation = true
 allow_nested = true
 allow_blank = false
+
+[equivalence]
+# python_version = "{v.major}.{v.minor}"  # Uncomment to allow any patch version
+extra_packages = ["{{cookiecutter.project_slug}}"]

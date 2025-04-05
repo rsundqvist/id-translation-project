@@ -2,13 +2,10 @@
 import functools as functools
 import typing as t
 
-if t.TYPE_CHECKING:
-    from _typeshed import IdentityFunction
-
 FuncT = t.TypeVar("FuncT", bound=t.Callable[..., t.Any])
 
 
-def wrap(func: FuncT) -> "IdentityFunction":
+def wrap(func: FuncT):  # https://github.com/python/mypy/issues/17166
     _update_translator_member_fn_docstring(func)
     return functools.wraps(func)
 

@@ -18,6 +18,6 @@ def test_untranslatable_ids():
     result = id_translation.translate(
         [0, -1, 10000],
         names="customer_id",
-        maximal_untranslated_fraction=1,
+        max_fails=1,
     )
     pprint(result)

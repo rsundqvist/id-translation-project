@@ -1,13 +1,16 @@
 #!/bin/bash
-set -e
+set -eu
+
+cd "$(dirname "$0")"
 
 echo "=========================================================================="
 echo "|                         VERIFY DEMO PROJECT                            |"
 echo "=========================================================================="
 echo "-- STEP 1/6: Install with 'poetry' ---------------------------------------"
 echo "--------------------------------------------------------------------------"
-poetry lock && poetry install
-source "$(poetry env info --path)/bin/activate"
+poetry lock
+poetry install
+eval "$(poetry env activate)"
 
 echo "--------------------------------------------------------------------------"
 echo "-- STEP 2/6: Format with 'ruff' ------------------------------------------"

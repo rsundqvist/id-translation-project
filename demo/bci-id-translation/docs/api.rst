@@ -1,5 +1,5 @@
 .. autosummary::
-   :toctree: _autosummary
+   :toctree: api
    :recursive:
 
    big_corporation_inc.id_translation.singleton

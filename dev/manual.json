@@ -5,6 +5,6 @@
     "organization": "Big Corporation Inc.",
     "namespace": "big_corporation_inc",
     "project_slug": "bci-id-translation",
-    "id_translation_version": "{ path = \"/home/dev/git/id-translation\" }"
+    "id_translation_version": "@ file:///home/dev/git/id-translation"
   }
 }

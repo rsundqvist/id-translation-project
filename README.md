@@ -41,7 +41,7 @@ Everything else should be installed for when running `poetry install`. Steps:
    ```
 
 The `setup-and-generate.sh` script will:
-1. Lint the generated project (`flake8`, `black`, `isort`)
+1. Lint the generated project (`ruff`)
 2. Run the included unit tests against the test database (`pytest`).
 3. Run static type checking (`mypy`).
 4. Generate documentation for the new project (`sphinx`).
