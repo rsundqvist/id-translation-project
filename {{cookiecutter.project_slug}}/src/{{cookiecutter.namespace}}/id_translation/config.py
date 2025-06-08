@@ -26,17 +26,13 @@ _config_root = _Path(__file__).parent.joinpath("config/")
 
 MAIN_CONFIGURATION_PATH = _config_root.joinpath("main.toml")
 """Contains all configuration which is not specific to a single fetcher."""
-FETCHING_CONFIGURATION_PATHS = list(_config_root.glob("fetching/*.toml"))
+FETCHING_CONFIGURATION_PATHS = [*_config_root.glob("fetching/*.toml")]
 """Contains configuration for sources, typically databases."""
 
 BASE_CACHE_DIR = _Path.home().joinpath(".{{cookiecutter.namespace}}/id-translation/")
 """Root location for cached data and persistent instances.
 
 Default location is ``~/.{{cookiecutter.namespace}}/id-translation/``.
-
-Combining ``Translator`` and ``Fetcher`` caching has its use cases, but
-should be done with care as calls to :meth:`id_translation.Translator.go_offline`
-does NOT invalidate the individual ``Fetcher`` caches.
 """
 
 TRANSLATOR_CACHE_DIR = BASE_CACHE_DIR / "translator"

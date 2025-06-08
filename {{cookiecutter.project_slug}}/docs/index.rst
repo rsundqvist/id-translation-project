@@ -16,8 +16,9 @@ Translation of IDs found in **{{cookiecutter.organization}}** databases.
 
    See docs for the backing API for additional help:  https://id-translation.readthedocs.io/
 
-This documentation was generated from the https://github.com/rsundqvist/id-translation-project on {% now 'local', '%A, %d %b %Y' %},
-a cookiecutter template template for the https://github.com/rsundqvist/id-translation package suite.
+This documentation was generated from the https://github.com/rsundqvist/id-translation-project template on
+`{% now 'local', '%A, %d %b %Y' %}`, a cookiecutter template template for the
+https://github.com/rsundqvist/id-translation package suite.
 
 Example
 -------

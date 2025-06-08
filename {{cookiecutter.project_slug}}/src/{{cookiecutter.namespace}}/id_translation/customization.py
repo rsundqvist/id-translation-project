@@ -6,7 +6,7 @@ import sqlalchemy
 from id_translation.fetching import SqlFetcher as _SqlFetcher
 from id_translation.types import IdType, NameType, SourceType
 
-from id_translation import Translator as _Translator
+from id_translation import Translator as _Translator  # Hide in generated docs.
 
 
 class CustomTranslator(_Translator[NameType, SourceType, IdType]):

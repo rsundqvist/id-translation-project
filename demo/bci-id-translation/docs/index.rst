@@ -16,8 +16,9 @@ Translation of IDs found in **Big Corporation Inc.** databases.
 
    See docs for the backing API for additional help:  https://id-translation.readthedocs.io/
 
-This documentation was generated from the https://github.com/rsundqvist/id-translation-project on Saturday, 05 Apr 2025,
-a cookiecutter template template for the https://github.com/rsundqvist/id-translation package suite.
+This documentation was generated from the https://github.com/rsundqvist/id-translation-project template on
+`Sunday, 08 Jun 2025`, a cookiecutter template template for the
+https://github.com/rsundqvist/id-translation package suite.
 
 Example
 -------

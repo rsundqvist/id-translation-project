@@ -6,8 +6,8 @@
 # AbstractFetcher and SqlFetcher-classes may be used here, except 'mapper' (see
 # subsection [fetching.mapping]).
 #
-# https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.fetching.html#id_translation.fetching.AbstractFetcher
-# https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.fetching.html#id_translation.fetching.SqlFetcher
+# https://id-translation.readthedocs.io/en/stable/api/id_translation.fetching.html#id_translation.fetching.AbstractFetcher
+# https://id-translation.readthedocs.io/en/stable/api/id_translation.fetching.html#id_translation.fetching.SqlFetcher
 #
 connection_string = "postgresql+pg8000://postgres:Sofia123!@localhost:5002/sakila"
 # password = "<very-secret-password>"  # Replaces '{password}' in the connection string, if present.
@@ -22,9 +22,9 @@ include_views = false  # This is the default
 # ------------------------------------------------------------------------------
 # AbstractFetcher configuration.
 #
-# https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.fetching.html#id_translation.fetching.AbstractFetcher
+# https://id-translation.readthedocs.io/en/stable/api/id_translation.fetching.html#id_translation.fetching.AbstractFetcher
 selective_fetch_all = true
-concurrent_operation_action = "ignore"  # Allow simultaneous access across threads.
+optional = false  # If true, discard if initialization fails or no sources are provided.
 
 # ------------------------------------------------------------------------------
 # Placeholder mapping configuration. Binds actual names in sources (such as
@@ -33,10 +33,10 @@ concurrent_operation_action = "ignore"  # Allow simultaneous access across threa
 # Vocabulary:
 #       value: A placeholder to match to a column name.
 #   candidate: The name of a column in a table.
-#     context: The name of the current table (the 'source').
+#     context: The source, e.g. a table or file name.
 #
 # https://id-translation.readthedocs.io/en/stable/documentation/mapping-primer.html
-# https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.html
+# https://id-translation.readthedocs.io/en/stable/api/id_translation.mapping.html
 #
 [fetching.mapping]
 # Placeholder mapping configuration. Binds actual names in sources (such as
@@ -48,7 +48,7 @@ concurrent_operation_action = "ignore"  # Allow simultaneous access across threa
 #     context: The name of the current table (the 'source').
 #
 # https://id-translation.readthedocs.io/en/stable/documentation/mapping-primer.html
-# https://id-translation.readthedocs.io/en/stable/_autosummary/id_translation.mapping.html
+# https://id-translation.readthedocs.io/en/stable/api/id_translation.mapping.html
 #
 verbose_logging = false  # High volume; set true only if needed
 

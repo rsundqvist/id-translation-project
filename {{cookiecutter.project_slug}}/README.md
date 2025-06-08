@@ -31,14 +31,14 @@ pip install {{cookiecutter.project_slug}}  # Install as a regular package
 The fastest way to translate something is the `{{cookiecutter.namespace}}.id_translation.translate()`-function:
 ```python
 from {{cookiecutter.namespace}}.id_translation import translate
-translate(df, inplace=True)
+translate(df, copy=False)
 ```
 This will translate columns in _df_ that end with _'\_id'_, gathering and fetching requested IDs from the database. You
 can get a preloaded `Translator` with the `load_cached_translator()`-function:
 ```python
 from {{cookiecutter.namespace}}.id_translation import load_cached_translator
 translator = load_cached_translator(max_age="0d")  # max_age="0d" forces recreation of the local cache.
-translator.translate(df, inplace=True)
+translator.translate(df, copy=False)
 ```
 The final option is to create a fresh translator instance:
 ```python
