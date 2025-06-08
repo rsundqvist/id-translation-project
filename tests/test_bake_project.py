@@ -4,7 +4,6 @@ from tempfile import TemporaryDirectory
 
 import pytest
 from pathlib import Path
-from directory_tree import display_tree
 
 GENERATED_PROJECT_SLUG = "bci-id-translation"
 REPLAY_FILE = os.getenv("REPLAY_FILE", "stable")
@@ -38,17 +37,12 @@ def test_create(tmpdir):
     assert tmpdir.joinpath(GENERATED_PROJECT_SLUG, "README.md").exists()
 
 
-def test_display_tree(project_workdir):
-    display_tree()
-
-
 def test_poetry_install(project_workdir):
     result = subprocess.run(["poetry", "install"], stderr=subprocess.STDOUT)
     assert result.returncode == 0
 
 
-def test_run_tests(project_workdir):
-    env = os.environ.copy()
-    env["PYTEST_ADDOPTS"] = "--color=yes"
-    result = subprocess.run(["poetry", "run", "pytest"], stderr=subprocess.STDOUT, env=env)
+def test_run_tests(project_workdir, monkeypatch):
+    monkeypatch.setenv("PYTEST_ADDOPTS", "--color=yes")
+    result = subprocess.run(["poetry", "run", "pytest"], stderr=subprocess.STDOUT)
     assert result.returncode == 0
