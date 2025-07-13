@@ -9,7 +9,7 @@ readme = "README.md"
 
 requires-python = ">=3.11"
 dependencies = [
-    "id-translation @ git+https://github.com/rsundqvist/id-translation.git",
+    "id-translation[fetching] @ git+https://github.com/rsundqvist/id-translation.git",
 ]
 
 

@@ -50,7 +50,6 @@ optional = false  # If true, discard if initialization fails or no sources are p
 # https://id-translation.readthedocs.io/en/stable/documentation/mapping-primer.html
 # https://id-translation.readthedocs.io/en/stable/api/id_translation.mapping.html
 #
-verbose_logging = false  # High volume; set true only if needed
 
 [fetching.mapping.score_function.disabled]
 # Using strict scoreless mapping to control access to the database.

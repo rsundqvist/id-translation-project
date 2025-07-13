@@ -27,7 +27,6 @@ fmt = "<Failed: id={id!r}>"
 [translator.mapping]
 on_unmapped = "ignore"  # Logs on the DEBUG level
 score_function = "modified_hamming"
-verbose_logging = false # High volume; set true only if needed
 cardinality = "N:1"  # Many-to-one mapping. Several names (e.g. DataFrame columns) can be mapped to the same table.
 
 # ------------------------------------------------------------------------------

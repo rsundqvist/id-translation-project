@@ -1,5 +1,5 @@
 import pandas as pd
-from id_translation.mapping.support import enable_verbose_debug_messages
+from id_translation.logging import enable_verbose_debug_messages
 
 from big_corporation_inc import id_translation
 

@@ -15,9 +15,3 @@ __all__ = [
     "create_translator",
     "load_cached_translator",
 ]
-
-from ._configure import configure_lib, configure_wrapper
-
-configure_lib()
-configure_wrapper()
-del configure_lib, configure_wrapper
