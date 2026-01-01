@@ -10,7 +10,7 @@ package-mode = false
 python = "~3.13.3"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "~8.3.5"
+pytest = "~9.0.2"
 ruff = "~0.11.13"
 cookiecutter = "~2.6.0"
 
