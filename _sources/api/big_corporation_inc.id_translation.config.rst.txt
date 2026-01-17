@@ -1,0 +1,26 @@
+﻿big\_corporation\_inc.id\_translation.config
+============================================
+
+.. automodule:: big_corporation_inc.id_translation.config
+
+   
+   .. rubric:: Module Attributes
+
+   .. autosummary::
+   
+      IdType
+      NameType
+      SourceType
+      TRANSLATOR_TYPE
+      MAIN_CONFIGURATION_PATH
+      FETCHING_CONFIGURATION_PATHS
+      BASE_CACHE_DIR
+      TRANSLATOR_CACHE_DIR
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      NameType
+      SourceType
+   
