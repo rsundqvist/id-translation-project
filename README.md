@@ -80,11 +80,11 @@ Creating virtualenv <span style="color: #06989A; ">bci-id-translation</span> in 
 <b>Package operations</b>: <span style="color: #3465A4; ">18</span> installs, <span style="color: #3465A4; ">0</span> updates, <span style="color: #3465A4; ">0</span> removals
 
   ...
-  <span style="color: #4E9A06; "><b>•</b></span> Installing <span style="color: #06989A; ">rics</span> (<span style="color: #4E9A06; ">3.0.0</span>)
-  <span style="color: #4E9A06; "><b>•</b></span> Installing <span style="color: #06989A; ">sqlalchemy</span> (<span style="color: #4E9A06; ">2.0.4</span>)
-  <span style="color: #4E9A06; "><b>•</b></span> Installing <span style="color: #06989A; ">id-translation</span> (<span style="color: #4E9A06; ">0.4.0</span>)
-  <span style="color: #4E9A06; "><b>•</b></span> Installing <span style="color: #06989A; ">pg8000</span> (<span style="color: #4E9A06; ">1.29.4</span>)
-  <span style="color: #4E9A06; "><b>•</b></span> Installing <span style="color: #06989A; ">pytest</span> (<span style="color: #4E9A06; ">7.2.2</span>)
+  <span style="color: #4E9A06; "><b>•</b></span> Installing <span style="color: #06989A; ">rics</span> (<span style="color: #4E9A06; ">6.1.1</span>)
+  <span style="color: #4E9A06; "><b>•</b></span> Installing <span style="color: #06989A; ">sqlalchemy</span> (<span style="color: #4E9A06; ">2.0.46</span>)
+  <span style="color: #4E9A06; "><b>•</b></span> Installing <span style="color: #06989A; ">id-translation</span> (<span style="color: #4E9A06; ">1.1.0</span>)
+  <span style="color: #4E9A06; "><b>•</b></span> Installing <span style="color: #06989A; ">pg8000</span> (<span style="color: #4E9A06; ">1.31.5</span>)
+  <span style="color: #4E9A06; "><b>•</b></span> Installing <span style="color: #06989A; ">pytest</span> (<span style="color: #4E9A06; ">8.3.5</span>)
 
 <b>Installing</b> the current project: <span style="color: #06989A; ">bci-id-translation</span> (<span style="color: #4E9A06; ">0.1.0</span>)
 <span style="color: #4E9A06; "><b>dev@ubuntu</b></span>:<span style="color: #3465A4; "><b>/git/bci-id-translation</b></span>$ poetry shell

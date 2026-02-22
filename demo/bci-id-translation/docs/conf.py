@@ -8,7 +8,7 @@ import big_corporation_inc.id_translation
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 project = "bci-id-translation"
-copyright = "Big Corporation Inc., 2025"
+copyright = "Big Corporation Inc., 2026"
 author = "Richard Sundqvist"
 
 # -- General configuration ---------------------------------------------------
