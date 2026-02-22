@@ -1,0 +1,593 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ID Translation &#8212; bci-id-translation  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="big_corporation_inc.id_translation.singleton" href="api/big_corporation_inc.id_translation.singleton.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">bci-id-translation  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/big_corporation_inc.id_translation.singleton.html">
+    Singleton
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/big_corporation_inc.id_translation.config.html">
+    Config
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/big_corporation_inc.id_translation.customization.html">
+    Customization
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/big_corporation_inc.id_translation.singleton.html">
+    Singleton
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/big_corporation_inc.id_translation.config.html">
+    Config
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/big_corporation_inc.id_translation.customization.html">
+    Customization
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is the generated documentation for the
+<a class="github reference external" href="https://github.com/rsundqvist/id-translation-project/tree/master/demo/bci-id-translation">rsundqvist/id-translation-project</a>
+demo project.</p>
+</div>
+<section id="id-translation">
+<h1>ID Translation<a class="headerlink" href="#id-translation" title="Link to this heading">#</a></h1>
+<p>Translation of IDs found in <strong>Big Corporation Inc.</strong> databases.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See docs for the backing API for additional help:  <a class="reference external" href="https://id-translation.readthedocs.io/">https://id-translation.readthedocs.io/</a></p>
+</div>
+<p>This documentation was generated from the <a class="github reference external" href="https://github.com/rsundqvist/id-translation-project">rsundqvist/id-translation-project</a> template on
+<cite>Sunday, 22 Feb 2026</cite>, a cookiecutter template template for the
+<a class="github reference external" href="https://github.com/rsundqvist/id-translation">rsundqvist/id-translation</a> package suite.</p>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h2>
+<p>Using <a class="reference internal" href="api/big_corporation_inc.id_translation.singleton.html#big_corporation_inc.id_translation.singleton.translate" title="big_corporation_inc.id_translation.singleton.translate"><code class="xref py py-func docutils literal notranslate"><span class="pre">translate()</span></code></a> with a temporary translation
+<a class="reference external" href="https://id-translation.readthedocs.io/en/stable/api/id_translation.offline.html#id_translation.offline.Format" title="(in id-translation v1.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Format</span></code></a>. Input file: <a class="reference download internal" download="" href="_downloads/f78f968ac785e2c7ef7cf52562d8ee82/transactions.csv"><code class="xref download docutils literal notranslate"><span class="pre">transactions.csv</span></code></a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">demo_translate</span><span class="p">():</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">big_corporation_inc.id_translation</span><span class="w"> </span><span class="kn">import</span> <span class="n">translate</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;transactions.csv&quot;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">translate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{id}</span><span class="s2">:[</span><span class="si">{title}</span><span class="s2">][</span><span class="si">{name}</span><span class="s2">]&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table" id="id1">
+<caption><span class="caption-text">Output: <a class="reference download internal" download="" href="_downloads/e2dc6e69af1743817586cd63900aa616/translated-transactions.csv"><code class="xref download docutils literal notranslate"><span class="pre">translated-transactions.csv</span></code></a>.</span><a class="headerlink" href="#id1" title="Link to this table">#</a></caption>
+<tbody>
+<tr class="row-odd"><td><p>customer_id</p></td>
+<td><p>film_id</p></td>
+<td><p>category_id</p></td>
+<td><p>staff_id</p></td>
+<td><p>rental_date</p></td>
+</tr>
+<tr class="row-even"><td><p>313:DONALD</p></td>
+<td><p>797:SILENCE KANE</p></td>
+<td><p>12:Music</p></td>
+<td><p>1:Mike</p></td>
+<td><p>2005-08-22 20:55:56</p></td>
+</tr>
+<tr class="row-odd"><td><p>107:FLORENCE</p></td>
+<td><p>767:SCALAWAG DUCK</p></td>
+<td><p>12:Music</p></td>
+<td><p>1:Mike</p></td>
+<td><p>2005-08-21 16:22:59</p></td>
+</tr>
+<tr class="row-even"><td><p>54:TERESA</p></td>
+<td><p>7:AIRPLANE SIERRA</p></td>
+<td><p>5:Comedy</p></td>
+<td><p>2:Jon</p></td>
+<td><p>2005-08-21 04:34:11</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="modules">
+<h2>Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h2>
+<p>Available modules are listed below. See <a class="reference internal" href="#key-functions"><span class="std std-ref">Reexported functions</span></a> for an overview of the most important functions of the
+package.</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/big_corporation_inc.id_translation.singleton.html#module-big_corporation_inc.id_translation.singleton" title="big_corporation_inc.id_translation.singleton"><code class="xref py py-obj docutils literal notranslate"><span class="pre">big_corporation_inc.id_translation.singleton</span></code></a></p></td>
+<td><p>Convenience functions using the <a class="reference external" href="https://id-translation.readthedocs.io/en/stable/api/id_translation.Translator.html#id_translation.Translator" title="(in id-translation v1.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Translator</span></code></a> singleton.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/big_corporation_inc.id_translation.config.html#module-big_corporation_inc.id_translation.config" title="big_corporation_inc.id_translation.config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">big_corporation_inc.id_translation.config</span></code></a></p></td>
+<td><p>Configuration constants.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/big_corporation_inc.id_translation.customization.html#module-big_corporation_inc.id_translation.customization" title="big_corporation_inc.id_translation.customization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">big_corporation_inc.id_translation.customization</span></code></a></p></td>
+<td><p>Custom implementations may be used to change behavior in ways that TOML configuration alone does not permit.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="module-big_corporation_inc.id_translation">
+<span id="reexported-functions"></span><span id="key-functions"></span><h2>Reexported functions<a class="headerlink" href="#module-big_corporation_inc.id_translation" title="Link to this heading">#</a></h2>
+<p>Translation of IDs found in Big Corporation Inc. databases.</p>
+<p>The most important functions are reexported here (<a class="reference internal" href="#module-big_corporation_inc.id_translation" title="big_corporation_inc.id_translation"><code class="xref py py-mod docutils literal notranslate"><span class="pre">big_corporation_inc.id_translation</span></code></a>). See the various
+submodules (navigation bar at the top) for complete documentation.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="big_corporation_inc.id_translation.get_singleton">
+<span class="sig-name descname"><span class="pre">get_singleton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recreate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#big_corporation_inc.id_translation.get_singleton" title="Link to this definition">#</a></dt>
+<dd><p>Get the <a class="reference external" href="https://id-translation.readthedocs.io/en/stable/api/id_translation.Translator.html#id_translation.Translator" title="(in id-translation v1.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Translator</span></code></a> singleton instance.</p>
+<p>The exact type returned depends on <a class="reference internal" href="api/big_corporation_inc.id_translation.config.html#big_corporation_inc.id_translation.config.TRANSLATOR_TYPE" title="big_corporation_inc.id_translation.config.TRANSLATOR_TYPE"><code class="xref py py-attr docutils literal notranslate"><span class="pre">TRANSLATOR_TYPE</span></code></a>. By
+default, this is the regular <a class="reference external" href="https://id-translation.readthedocs.io/en/stable/api/id_translation.Translator.html#id_translation.Translator" title="(in id-translation v1.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">id_translation.Translator</span></code></a> type provided by <a class="reference external" href="https://id-translation.readthedocs.io/en/stable/api/id_translation.html#module-id_translation" title="(in id-translation v1.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">id_translation</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>recreate</strong> – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, force recreating the current singleton instance.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A <a class="reference external" href="https://id-translation.readthedocs.io/en/stable/api/id_translation.Translator.html#id_translation.Translator" title="(in id-translation v1.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">id_translation.Translator</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="big_corporation_inc.id_translation.translate">
+<span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">translatable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">override_function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_fails</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">io_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#big_corporation_inc.id_translation.translate" title="Link to this definition">#</a></dt>
+<dd><p>Translate IDs to human-readable strings.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Convenience method. Calls <a class="reference external" href="https://id-translation.readthedocs.io/en/stable/api/id_translation.Translator.translate.html#id_translation.Translator.translate" title="(in id-translation v1.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">id_translation.Translator.translate()</span></code></a> using the the current <a class="reference internal" href="#big_corporation_inc.id_translation.get_singleton" title="big_corporation_inc.id_translation.get_singleton"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_singleton()</span></code></a>
+instance. See below for original docstring.</p>
+</div>
+<dl class="simple">
+<dt>Simplified process:</dt><dd><ol class="arabic simple">
+<li><p>The <code class="xref py py-attr docutils literal notranslate"><span class="pre">map</span></code> method performs name-to-source mapping (see <code class="xref py py-class docutils literal notranslate"><span class="pre">DirectionalMapping</span></code>).</p></li>
+<li><p>The <code class="xref py py-attr docutils literal notranslate"><span class="pre">fetch</span></code> method extracts IDs to translate and retrieves data (see <code class="xref py py-class docutils literal notranslate"><span class="pre">TranslationMap</span></code>).</p></li>
+<li><p>Finally, the <a class="reference internal" href="#big_corporation_inc.id_translation.translate" title="big_corporation_inc.id_translation.translate"><code class="xref py py-attr docutils literal notranslate"><span class="pre">translate</span></code></a> method applies the translations and returns to the caller.</p></li>
+</ol>
+</dd>
+</dl>
+<p>See the <a class="reference external" href="https://id-translation.readthedocs.io/en/stable/documentation/translation-primer.html#translation-primer" title="(in id-translation v1.1)"><span>Translation primer</span></a> page for a detailed process description.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>🔑 This is a key event method. See <a class="reference external" href="https://id-translation.readthedocs.io/en/stable/documentation/translation-logging.html#key-events" title="(in id-translation v1.1)"><span>Key Event Records</span></a> for details.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>translatable</strong> – A data structure to translate.</p></li>
+<li><p><strong>names</strong> – Explicit names to translate. Derive from <cite>translatable</cite> if <code class="docutils literal notranslate"><span class="pre">None</span></code>. Alternatively, you may pass a
+<code class="docutils literal notranslate"><span class="pre">dict</span></code> on the form <code class="docutils literal notranslate"><span class="pre">{name_in_translatable:</span> <span class="pre">source_to_use}</span></code>.</p></li>
+<li><p><strong>ignore_names</strong> – Names <strong>not</strong> to translate, or a predicate <code class="docutils literal notranslate"><span class="pre">(NameType)</span> <span class="pre">-&gt;</span> <span class="pre">bool</span></code>.</p></li>
+<li><p><strong>copy</strong> – If <code class="docutils literal notranslate"><span class="pre">False</span></code>, translate in-place and return <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>override_function</strong> – A callable <code class="docutils literal notranslate"><span class="pre">(name,</span> <span class="pre">sources,</span> <span class="pre">ids)</span> <span class="pre">-&gt;</span> <span class="pre">Source</span> <span class="pre">|</span> <span class="pre">None</span></code>. See <code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapper.apply()</span></code> for details.</p></li>
+<li><p><strong>max_fails</strong> – The maximum fraction of IDs for which translation may fail. 1=disabled.</p></li>
+<li><p><strong>reverse</strong> – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, perform translations back to IDs. Offline mode only.</p></li>
+<li><p><strong>fmt</strong> – A <code class="xref py py-class docutils literal notranslate"><span class="pre">format</span> <span class="pre">string</span></code> such as <strong>‘{id}:{name}’</strong> use. Default is <code class="xref py py-attr docutils literal notranslate"><span class="pre">Translator.fmt</span></code>.</p></li>
+<li><p><strong>io_kwargs</strong> – Used to initialize the <span class="xref std std-doc">IO implementation</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A translated copy of <cite>translatable</cite> if <code class="docutils literal notranslate"><span class="pre">copy=True</span></code>, otherwise <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Manual <a class="reference external" href="../documentation/translation-primer.html#name-to-source-mapping">name-to-source</a> mapping with a
+temporary name-only <code class="xref py py-class docutils literal notranslate"><span class="pre">Format</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n2s</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;lions&quot;</span><span class="p">:</span> <span class="s2">&quot;animals&quot;</span><span class="p">,</span> <span class="s2">&quot;big_cats&quot;</span><span class="p">:</span> <span class="s2">&quot;animals&quot;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">translator</span><span class="o">.</span><span class="n">translate</span><span class="p">({</span><span class="s2">&quot;lions&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;big_cats&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span> <span class="n">names</span><span class="o">=</span><span class="n">n2s</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{name}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="go">{&#39;lions&#39;: &#39;Simba&#39;, &#39;big_cats&#39;: &#39;Simba&#39;}</span>
+</pre></div>
+</div>
+<p>Name mappings must be complete; any name not present in the keys will be ignored (left as-is).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>UntranslatableTypeError</strong> – If <code class="docutils literal notranslate"><span class="pre">type(translatable)</span></code> cannot be translated.</p></li>
+<li><p><strong>MissingNamesError</strong> – If <cite>names</cite> are not given and cannot be derived from <cite>translatable</cite>.</p></li>
+<li><p><strong>MappingError</strong> – If any required (explicitly given) names fail to map to a source.</p></li>
+<li><p><strong>MappingError</strong> – If name-to-source mapping is ambiguous.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If <cite>max_fails</cite> is not a valid fraction.</p></li>
+<li><p><strong>TooManyFailedTranslationsError</strong> – If translation fails for more than <cite>max_fails</cite> of IDs.</p></li>
+<li><p><strong>ConnectionStatusError</strong> – If <code class="docutils literal notranslate"><span class="pre">reverse=True</span></code> while the <code class="xref py py-class docutils literal notranslate"><span class="pre">Translator</span></code> is online.</p></li>
+<li><p><strong>UserMappingError</strong> – If <cite>override_function</cite> returns a source which is not known, and
+    <code class="docutils literal notranslate"><span class="pre">mapper.on_unknown_user_override</span> <span class="pre">!=</span> <span class="pre">'ignore'</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The <span class="target" id="index-0"></span><a class="reference external" href="https://id-translation.readthedocs.io/en/stable/api/id_translation.html#envvar-ID_TRANSLATION_DISABLED" title="(in id-translation v1.1)"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ID_TRANSLATION_DISABLED</span></code></a> variable.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="big_corporation_inc.id_translation.create_translator">
+<span class="sig-name descname"><span class="pre">create_translator</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#big_corporation_inc.id_translation.create_translator" title="Link to this definition">#</a></dt>
+<dd><p>Create a new preconfigured <a class="reference external" href="https://id-translation.readthedocs.io/en/stable/api/id_translation.Translator.html#id_translation.Translator" title="(in id-translation v1.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Translator</span></code></a> instance.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="big_corporation_inc.id_translation.load_cached_translator">
+<span class="sig-name descname"><span class="pre">load_cached_translator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_age</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'12h'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#big_corporation_inc.id_translation.load_cached_translator" title="Link to this definition">#</a></dt>
+<dd><p>Load or (re)create a cached <a class="reference external" href="https://id-translation.readthedocs.io/en/stable/api/id_translation.Translator.html#id_translation.Translator" title="(in id-translation v1.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Translator</span></code></a> instance.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="api/big_corporation_inc.id_translation.singleton.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">big_corporation_inc.id_translation.singleton</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-big_corporation_inc.id_translation">Reexported functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#big_corporation_inc.id_translation.get_singleton"><code class="docutils literal notranslate"><span class="pre">get_singleton()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#big_corporation_inc.id_translation.translate"><code class="docutils literal notranslate"><span class="pre">translate()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#big_corporation_inc.id_translation.create_translator"><code class="docutils literal notranslate"><span class="pre">create_translator()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#big_corporation_inc.id_translation.load_cached_translator"><code class="docutils literal notranslate"><span class="pre">load_cached_translator()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright Big Corporation Inc., 2026.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

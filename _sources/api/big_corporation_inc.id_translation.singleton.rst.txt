@@ -1,0 +1,18 @@
+﻿big\_corporation\_inc.id\_translation.singleton
+===============================================
+
+.. automodule:: big_corporation_inc.id_translation.singleton
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      fetch
+      get_singleton
+      go_offline
+      map
+      map_scores
+      translate
+      translated_names
+   
