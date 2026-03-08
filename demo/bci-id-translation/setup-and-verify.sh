@@ -6,11 +6,11 @@ cd "$(dirname "$0")"
 echo "=========================================================================="
 echo "|                         VERIFY DEMO PROJECT                            |"
 echo "=========================================================================="
-echo "-- STEP 1/6: Install with 'poetry' ---------------------------------------"
+echo "-- STEP 1/6: Install with 'uv' -------------------------------------------"
 echo "--------------------------------------------------------------------------"
-poetry lock
-poetry install
-eval "$(poetry env activate)"
+uv lock
+uv sync
+source .venv/bin/activate
 
 echo "--------------------------------------------------------------------------"
 echo "-- STEP 2/6: Format with 'ruff' ------------------------------------------"
@@ -26,7 +26,7 @@ ruff check src/ tests/
 
 echo "--------------------------------------------------------------------------"
 echo "-- STEP 5/6: Check types with 'mypy' -------------------------------------"
-mypy --non-interactive -p "big_corporation_inc.id_translation" -p "tests.id_translation"
+mypy -p "big_corporation_inc.id_translation" -p "tests.id_translation"
 
 echo "--------------------------------------------------------------------------"
 echo "-- STEP 6/6: Generate documentation with 'sphinx' ------------------------"

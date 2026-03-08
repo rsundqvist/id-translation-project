@@ -1,19 +1,29 @@
-[tool.poetry]
+[project]
 name = "id-translation-project"
 version = "0.0.0"
 description = "A cookiecutter for creating specialized ID translation packages."
-authors = ["Richard Sundqvist <richard.sundqvist@live.se>"]
+authors = [{ name = "Richard Sundqvist", email = "richard.sundqvist@live.se" }]
+requires-python = ">= 3.11"
 readme = "README.md"
-package-mode = false
 
-[tool.poetry.dependencies]
-python = "~3.13.3"
+[dependency-groups]
+dev = [
+    "pytest~=9.0.2",
+    "ruff~=0.15.5",
+    "cookiecutter~=2.7.1",
+]
 
-[tool.poetry.group.dev.dependencies]
-pytest = "~8.3.5"
-ruff = "~0.11.13"
-cookiecutter = "~2.6.0"
+[tool.ruff]
+line-length = 120
+fix = true
+
+[tool.ruff.lint.pycodestyle]
+max-line-length = 150
+
+[tool.uv]
+package = false
+default-groups = "all"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["uv_build>=0.10.9,<0.11.0"]
+build-backend = "uv_build"

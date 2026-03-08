@@ -23,9 +23,9 @@ This is the main entry point for all ID translation tasks. Click
 for this function.
 
 # Basic usage
-Install either for development (with Poetry) or for regular use (with pip).
+Install either for development (with uv) or for regular use (with pip).
 ```bash
-poetry install  # Install for development and tests
+uv sync  # Install for development and tests
 pip install {{cookiecutter.project_slug}}  # Install as a regular package
 ```
 The fastest way to translate something is the `{{cookiecutter.namespace}}.id_translation.translate()`-function:

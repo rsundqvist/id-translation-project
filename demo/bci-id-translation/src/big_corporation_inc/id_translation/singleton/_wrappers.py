@@ -1,8 +1,8 @@
 """Convenience functions using the :class:`id_translation.Translator` singleton."""
 
-from .. import config
 from ._singleton import get_singleton
 from ._wrap import wrap
+from .. import config
 
 
 @wrap(config.TRANSLATOR_TYPE.translate)
@@ -15,6 +15,12 @@ def translate(*args, **kwargs):
 def translated_names(*args, **kwargs):
     """Docstring will be generated."""
     return get_singleton().translated_names(*args, **kwargs)
+
+
+@wrap(config.TRANSLATOR_TYPE.extract_names)
+def extract_names(*args, **kwargs):
+    """Docstring will be generated."""
+    return get_singleton().extract_names(*args, **kwargs)
 
 
 @wrap(config.TRANSLATOR_TYPE.map)
