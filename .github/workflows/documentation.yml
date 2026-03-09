@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd demo/bci-id-translation/
-          uv sync --locked --all-extras
+          uv sync
           uv tree
 
       - name: Sphinx build

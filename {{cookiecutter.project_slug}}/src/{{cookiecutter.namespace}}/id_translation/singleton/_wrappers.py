@@ -5,6 +5,12 @@ from ._wrap import wrap
 from .. import config
 
 
+@wrap(config.TRANSLATOR_TYPE.initialize_sources)
+def initialize_sources(*args, **kwargs):
+    """Docstring will be generated."""
+    return get_singleton().initialize_sources(*args, **kwargs)
+
+
 @wrap(config.TRANSLATOR_TYPE.translate)
 def translate(*args, **kwargs):
     """Docstring will be generated."""
@@ -41,17 +47,7 @@ def fetch(*args, **kwargs):
     return get_singleton().fetch(*args, **kwargs)
 
 
-if hasattr(config.TRANSLATOR_TYPE, "go_offline"):
-
-    @wrap(config.TRANSLATOR_TYPE.go_offline)
-    def go_offline(*args, **kwargs):
-        """Docstring will be generated."""
-        return get_singleton().go_offline(*args, **kwargs)
-
-elif hasattr(config.TRANSLATOR_TYPE, "store"):
-
-    @wrap(config.TRANSLATOR_TYPE.store)
-    def go_offline(*args, **kwargs):
-        """Docstring will be generated."""
-        # TODO: Remove this for 1.0.0
-        return get_singleton().store(*args, **kwargs)  # type: ignore[attr-defined]
+@wrap(config.TRANSLATOR_TYPE.go_offline)
+def go_offline(*args, **kwargs):
+    """Docstring will be generated."""
+    return get_singleton().go_offline(*args, **kwargs)

@@ -9,7 +9,7 @@ readme = "README.md"
 
 requires-python = ">=3.11"
 dependencies = [
-    "id-translation[fetching] (>=1.2.0,<2.0.0)"
+    "id-translation[fetching] (>=1.2.0,<2.0.0)",
 ]
 
 
