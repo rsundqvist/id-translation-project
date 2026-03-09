@@ -9,22 +9,23 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v6
+
+      - name: Set up Python 3.14 with uv
+        uses: astral-sh/setup-uv@v7
         with:
-          python-version: "3.13"
+          python-version: '3.14'
+
       - name: Install dependencies
         run: |
           cd demo/bci-id-translation/
-          pip install poetry
-          poetry install
-          poetry show
+          uv sync --locked --all-extras
+          uv tree
 
       - name: Sphinx build
         run: |
           cd demo/bci-id-translation/
-          source "$(poetry env info --path)/bin/activate"
+          source .venv/bin/activate
           sphinx-build docs/ docs/_build
 
       - name: Deploy to GitHub Pages

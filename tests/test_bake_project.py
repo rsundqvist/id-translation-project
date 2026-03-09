@@ -37,12 +37,12 @@ def test_create(tmpdir):
     assert tmpdir.joinpath(GENERATED_PROJECT_SLUG, "README.md").exists()
 
 
-def test_poetry_install(project_workdir):
-    result = subprocess.run(["poetry", "install"], stderr=subprocess.STDOUT)
+def test_uv_install(project_workdir):
+    result = subprocess.run(["uv", "sync"], stderr=subprocess.STDOUT)
     assert result.returncode == 0
 
 
 def test_run_tests(project_workdir, monkeypatch):
     monkeypatch.setenv("PYTEST_ADDOPTS", "--color=yes")
-    result = subprocess.run(["poetry", "run", "pytest"], stderr=subprocess.STDOUT)
+    result = subprocess.run(["uv", "run", "pytest"], stderr=subprocess.STDOUT)
     assert result.returncode == 0

@@ -15,7 +15,7 @@ on:
         description: "Test scenario tags"
   push:
     branches:
-     - master
+      - master
   pull_request:
     branches:
 
@@ -28,31 +28,30 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        replay-file: [ "stable", "default", "master" ]
+        replay-file: [ 'stable', 'default', 'master' ]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up Python 3.14 with uv
+        uses: astral-sh/setup-uv@v7
         with:
-          python-version: "3.13"
+          python-version: '3.14'
 
       - name: Start Docker database
         shell: bash
         run: docker run -d -p 5002:5432 rsundqvist/sakila-preload:postgres
 
-      - name: Install system deps
-        shell: bash
+      - name: Install the project
         run: |
-          pip install poetry --quiet
-          poetry install
-          poetry run pip list
+          uv sync --locked --all-extras
+          uv tree
+
       - name: Lint
         shell: bash
-        run: |
-          poetry run dev/lint.sh
+        run: uv run dev/lint.sh
+
       - name: Run tests
         shell: bash
         run: |
           echo "REPLAY_FILE=$REPLAY_FILE"
-          poetry run pytest --color=yes tests/
+          uv run pytest --color=yes tests/

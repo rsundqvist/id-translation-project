@@ -11,7 +11,7 @@ message = f"""
 {GREEN} *   Module:{RESET} '{{cookiecutter.namespace}}.id_translation'
 {GREEN} *  Version:{RESET} 'id-translation {{cookiecutter.id_translation_version}}'
 Useful links:
-{GREEN} * Installing Poetry:{RESET} https://python-poetry.org/docs/#installation
+{GREEN} *     Installing uv:{RESET} https://docs.astral.sh/uv/getting-started/installation/
 {GREEN} *     Documentation:{RESET} https://id-translation.readthedocs.io/
 {GREEN} *   Asking for help:{RESET} https://github.com/rsundqvist/id-translation-project/issues/new
 {GREEN} *    Reporting bugs:{RESET} https://github.com/rsundqvist/id-translation/issues/new

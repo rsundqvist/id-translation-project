@@ -17,16 +17,16 @@ on:
     branches:
 
 jobs:
-  tests:
+  demo-project:
     name: Generate and verify
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up Python 3.14 with uv
+        uses: astral-sh/setup-uv@v7
         with:
-          python-version: "3.13"
+          python-version: '3.14'
 
       - name: Start Docker database
         shell: bash
@@ -34,7 +34,7 @@ jobs:
 
       - name: Install system deps
         shell: bash
-        run: pip install poetry cookiecutter
+        run: pip install cookiecutter
 
       - name: Generate project
         shell: bash
