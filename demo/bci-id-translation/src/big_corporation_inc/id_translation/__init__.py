@@ -15,3 +15,9 @@ __all__ = [
     "create_translator",
     "load_cached_translator",
 ]
+
+from id_translation import utils as _tmp
+
+# Attribute id_translation warnings to the caller, past the wrappers in this package.
+_tmp.add_skip_file_prefix(__file__.removesuffix("__init__.py"))
+del _tmp

@@ -4,7 +4,12 @@
 The ``bci-id-translation`` package provides pre-configured ID translation, powered by the
 **ID Translation** [![PyPI - Version](https://img.shields.io/pypi/v/id-translation.svg)](https://pypi.python.org/pypi/id-translation)
 library. This project was generated from the [id-translation-project](https://github.com/rsundqvist/id-translation-project)
-cookiecutter template on *Monday, 09 Mar 2026*.
+cookiecutter template on *Saturday, 11 May 2019*.
+
+> **The most important artifact in this package is its configuration.** The TOML files under
+> [`src/big_corporation_inc/id_translation/config/`](src/big_corporation_inc/id_translation/config/) declare
+> *what* gets translated and *which sources* the labels come from. Adopting id-translation is mostly a matter of studying
+> the bundled example config and adapting it to your own data -- the Python wrappers around it rarely change.
 
 # 🔧 Quickstart 🚀
 Start the test database:
@@ -16,6 +21,19 @@ Then, from a new window, run:
 ./setup-and-verify.sh
 ```
 See [GETTING_STARTED.md](GETTING_STARTED.md) for further instructions.
+
+# 📂 Make it yours: the configuration
+The bundled configuration translates the [Sakila demo database](https://hub.docker.com/r/rsundqvist/sakila-preload).
+**Replacing it with your own is the main task** -- and the part of this package you will actually maintain:
+
+* [`config/main.toml`](src/big_corporation_inc/id_translation/config/main.toml) -- the `Translator` itself:
+  the output format and how column names map to sources.
+* [`config/fetching/`](src/big_corporation_inc/id_translation/config/fetching/) -- one file per data source
+  (SQL databases, files, or in-memory data).
+
+Study these against the [configuration format documentation](https://id-translation.readthedocs.io/en/stable/documentation/translator-config.html),
+then point them at your own databases and tables. Re-running `./setup-and-verify.sh` is a fast way to confirm your edits
+still work.
 
 ## The ``Translator.translate()``-function
 This is the main entry point for all ID translation tasks. Click

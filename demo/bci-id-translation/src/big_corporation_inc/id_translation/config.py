@@ -26,8 +26,12 @@ _config_root = _Path(__file__).parent.joinpath("config/")
 
 MAIN_CONFIGURATION_PATH = _config_root.joinpath("main.toml")
 """Contains all configuration which is not specific to a single fetcher."""
-FETCHING_CONFIGURATION_PATHS = [*_config_root.glob("fetching/*.toml")]
-"""Contains configuration for sources, typically databases."""
+FETCHING_CONFIGURATION_PATHS = sorted(_config_root.glob("fetching/*.toml"))
+"""Contains configuration for sources, typically databases.
+
+Sorted so that fetcher order -- and hence the ``load_cached_translator()`` cache fingerprint -- does not
+depend on the order the filesystem returns the files in.
+"""
 
 BASE_CACHE_DIR = _Path.home().joinpath(".big_corporation_inc/id-translation/")
 """Root location for cached data and persistent instances.

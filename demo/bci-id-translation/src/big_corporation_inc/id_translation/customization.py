@@ -24,7 +24,9 @@ class CustomSqlFetcher(_SqlFetcher[IdType]):
     """
 
     @classmethod
-    def parse_connection_string(cls, connection_string: str, arn: str | None) -> str:
+    def parse_connection_string(
+        cls, connection_string: str | sqlalchemy.engine.URL, arn: str | None
+    ) -> str | sqlalchemy.engine.URL:
         """Finalize the connection string by reading the password from AWS."""
         import json
 
@@ -36,15 +38,15 @@ class CustomSqlFetcher(_SqlFetcher[IdType]):
         actual_password = json.loads(SecretCache().get_secret_string(arn))["password"]
         return super().parse_connection_string(connection_string, actual_password)
 
-    @classmethod
     def select_where(
-        cls,
+        self,
         select: sqlalchemy.sql.Select[tuple[IdType, ...]],
         *,
-        ids: set[IdType] | None,
-        id_column: sqlalchemy.sql.ColumnElement[IdType],
-        table: sqlalchemy.Table,  # noqa: ARG003
-    ) -> sqlalchemy.sql.Select:  # type: ignore[type-arg]
+        ids: set[IdType] | None,  # noqa: ARG002
+        id_column: sqlalchemy.sql.ColumnElement[IdType],  # noqa: ARG002
+        table: sqlalchemy.Table,
+    ) -> sqlalchemy.sql.Select[tuple[IdType, ...]]:
+        """Restrict every query to rows flagged as enabled."""
         if "enabled" in table.columns:
             enabled = table.columns["enabled"]
             select = select.where(enabled == 1)
