@@ -61,7 +61,7 @@ Template-repo dev env (`uv sync`; tasks in `tasks.py`):
 uv run inv tests        # bake the template into a tmpdir + uv sync + run the generated tests (needs DB)
 uv run inv lint         # ruff + template_lint (dev/lint.sh: no leaked concrete values)
 uv run inv format       # ruff format + --fix-only
-uv run inv generate-demo  # regenerate demo/bci-id-translation/ from a replay file (dev/generate-project.sh)
+uv run inv generate-demo --replay-file=demo/replay.json  # regenerate demo/bci-id-translation/ (dev/generate-project.sh)
 uv run inv backport     # back-port demo edits into the template (dev/backport.py), then lint
 uv run inv demo-verify  # run the demo's own ./setup-and-verify.sh pipeline
 ```
