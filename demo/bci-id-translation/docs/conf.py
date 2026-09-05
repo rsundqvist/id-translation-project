@@ -8,7 +8,7 @@ import big_corporation_inc.id_translation
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 project = "bci-id-translation"
-copyright = "Big Corporation Inc., 2026"
+copyright = "Big Corporation Inc., 2019"
 author = "Richard Sundqvist"
 
 # -- General configuration ---------------------------------------------------
@@ -49,32 +49,8 @@ html_theme = "pydata_sphinx_theme"
 html_static_path = []
 html_theme_options = {}
 
+# -- Nitpicky configuration ----------------------------------------------------
+nitpicky = True
+nitpick_ignore = []
+nitpick_ignore_regex = []
 
-# -- Hacks -------------------------------------------------------------------
-def monkeypatch_autosummary_toc() -> None:
-    from sphinx.addnodes import toctree
-    from sphinx.ext.autosummary import Autosummary, autosummary_toc
-
-    original = Autosummary.run
-
-    def make_toc_tree_titles_shorter(self: Autosummary):
-        # tocnode['entries'] = [(".".join(docn.partition("/")[-1].split(".")[-2:]), docn) for docn in docnames]
-        toc: toctree
-        nodes = original(self)
-
-        for node in nodes:
-            if isinstance(node, autosummary_toc):
-                for toc in node.children:
-                    entries = toc["entries"]
-
-                    for i, (title, ref) in enumerate(entries):
-                        if title is None and ref.count(".") > 1:
-                            title = ref.split(".")[-1].title()
-                            entries[i] = (title, ref)
-
-        return nodes
-
-    Autosummary.run = make_toc_tree_titles_shorter
-
-
-monkeypatch_autosummary_toc()
