@@ -7,6 +7,13 @@ Generated documentation example:
 
 * https://rsundqvist.github.io/id-translation-project/
 
+> **Which path are you on?**
+> - **Building a new, shared translation package** for your organization -- one that other projects will depend on?
+>   You're in the right place; keep reading.
+> - **Adding id-translation to an application you already have?** This template is likely more than you need. Follow the
+>   [Adopting in an existing project](https://id-translation.readthedocs.io/en/stable/documentation/migration-guide.html)
+>   guide instead -- it wires `Translator.from_config()` straight into your existing code.
+
 # 🔧 Quickstart 🚀
 1. Start the test database
    ```bash
@@ -17,19 +24,24 @@ Generated documentation example:
    ./setup-and-verify.sh
    ```
 
-The `setup-and-generate.sh` script will:
-1. Lint the generated project (`ruff`).
-2. Run the included unit tests against the test database (`pytest`).
-3. Run static type checking (`mypy`).
-4. Generate documentation for the new project (`sphinx`).
+The `setup-and-verify.sh` script will:
+1. Install the project and its dependencies (`uv lock`, `uv sync`).
+2. Format the generated project (`ruff format`).
+3. Run the included unit tests against the test database (`pytest`).
+4. Lint the generated project (`ruff check`).
+5. Run static type checking (`mypy`).
+6. Generate documentation for the new project (`sphinx`).
 
-To configure the project for your own needs, keep reading!
+The bundled configuration translates the Sakila demo database. **Adapting it to your own data is the main task** -- keep
+reading!
 
 # Configuration
-Basic [configuration](src/{{cookiecutter.namespace}}/id_translation/config) and 
-[factory methods](src/{{cookiecutter.namespace}}/id_translation/_initialize.py) are included, as well as some simple
-tests. Copying and adjusting the included [tests](tests/id_translation/test_basics.py) is an easy way to ensure that
-basic connectivity and functionality is working as intended while modifying the included configuration to match your domain.
+**The configuration under [`config/`](src/{{cookiecutter.namespace}}/id_translation/config) is the core of this
+package** -- the part you study, adapt, and (in an organization) publish for other projects to reuse. The
+[factory methods](src/{{cookiecutter.namespace}}/id_translation/_initialize.py) and wrappers around it rarely change.
+
+Copying and adjusting the included [tests](tests/id_translation/test_basics.py) is an easy way to ensure that basic
+connectivity and functionality is working as intended while you modify the included configuration to match your domain.
 
 You'll find links to API documentation and crash courses [near the end](#need-help) of this document.
 
@@ -39,12 +51,16 @@ The generated project structure, and some possible TODOs.
 {{cookiecutter.project_slug}}/
 ├── demo-notebook.ipynb  # <------------------- basic usage examples (Jupyter) -
 ├── docs/
+│     ├── _templates/
+│     │     └── autosummary/
+│     │         └── module.rst
 │     ├── api.rst
 │     ├── conf.py
 │     ├── example.py
 │     ├── index.rst
 │     ├── transactions.csv
 │     └── translated-transactions.csv
+├── .gitignore
 ├── GETTING_STARTED.md
 ├── pyproject.toml
 ├── README.md
@@ -77,7 +93,8 @@ The generated project structure, and some possible TODOs.
     ├── id_translation/
     │     ├── __init__.py
     │     ├── test_basics.py
-    │     └── test_demo_some_things.py
+    │     ├── test_demo_some_things.py
+    │     └── test_import.py
     └── __init__.py
 ```
 All commands should be executed from the `{{cookiecutter.project_slug}}` directory.
@@ -91,7 +108,7 @@ docker run -p 5002:5432 --rm rsundqvist/sakila-preload:postgres
 from a **new terminal window**, then run:
 
 ```bash
-pytest tests/
+uv run pytest tests/
 ```
 to execute the included tests. If the tests pass, the project has been correctly installed and the Docker database is
 up and running. Read through the rest of this document for more information on how to adapt the template project to suit 
@@ -127,7 +144,7 @@ to disable Placeholder-to-column mapping your
 [fetching configuration files](src/{{cookiecutter.namespace}}/id_translation/config/fetching). Overrides are not needed
 for columns that are an exact match, i.e. you don't have to specify `id = "id"` anywhere. More details may be found in
 the [Override-only mapping (link to `id-translation`)](https://id-translation.readthedocs.io/en/stable/documentation/mapping-primer.html#override-only-mapping)
-documentation, or check out [inactive/override-only.toml](src/{{cookiecutter.namespace}}/config/fetching/inactive/override-only.toml) 
+documentation, or check out [inactive/override-only.toml](src/{{cookiecutter.namespace}}/id_translation/config/fetching/inactive/override-only.toml)
 for a limited but working example.
 
 ## 🔧 Non-SQL translation sources
@@ -151,7 +168,8 @@ fully qualified path as the `function`-argument, e.g.
   do_a_good_job = true
   ```
 
-will use `your_function` defined in [customization.py](src/ute/id_translation/customization.py), and will pass
+will use `your_function` defined in
+[customization.py](src/{{cookiecutter.namespace}}/id_translation/customization.py), and will pass
 `do_a_good_job=True` whenever it is called. These functions must have the correct signature, see
 - https://id-translation.readthedocs.io/en/stable/api/id_translation.mapping.types.html#id_translation.mapping.types.AliasFunction
 - https://id-translation.readthedocs.io/en/stable/api/id_translation.mapping.types.html#id_translation.mapping.types.FilterFunction
@@ -163,10 +181,23 @@ configuration. Custom Score and Filter functions may be defined in the same way.
 Adjust the template to fit your needs.
 
 ### Translating more types
-By default, all `Translator` instances can translate the "standard" built-in collections, as well as `pandas` and 
-`numpy` types. If `polars` or `dask` are installed, integrations for these libraries are loaded automatically.
+All `Translator` instances can translate the "standard" built-in collections, as well as `numpy` arrays, without any
+extra dependencies. Integrations for `pandas`, `polars`, `dask` and `pyarrow` ship with `id-translation` and are loaded
+automatically when the library in question is installed.
 
-You may also build own `DataStructureIO` implementation to create a [user-defined integration] for your package.
+You may also build your own `DataStructureIO` implementation to create a [user-defined integration] for your package.
+
+Per-call options for the built-in integrations go in `io_kwargs`. For `pandas`, the most useful is categorical output:
+
+```python
+translate(df, io_kwargs={"as_category": True, "ordered": "id"})
+```
+
+Note that `ordered` and `observed` are ignored unless `as_category=True`, so all three belong together. See
+[Categorical translation] for what the ordering choices cost.
+
+[user-defined integration]: https://id-translation.readthedocs.io/en/stable/documentation/translation-io.html#user-defined-integrations
+[Categorical translation]: https://id-translation.readthedocs.io/en/stable/api/id_translation.dio.integration.pandas.html#categorical-translation
 
 ### Handling `translate` arguments from users
 The `TranslationHelper` is a utility class for managing how the `Translator.translate()`-method is called in
@@ -178,11 +209,43 @@ See the [documentation][TranslationHelper] for an example of how the ``Translati
 [TranslationHelper]: https://id-translation.readthedocs.io/en/stable/api/id_translation.utils.translation_helper.html
 
 ### Applying transformations
-The `Transformer` interface is useful when the handling things like composite fields, e.g. bitmasks. The built-in
-[BitmaskTransformer] may be configured on a per-source basis to allow the `Translator` to handle data which would
-otherwise by difficult to process. The interface is generic and may be extended for arbitrary tasks.
+The `Transformer` interface is useful for handling composite fields, e.g. bitmasks. The built-in [BitmaskTransformer]
+may be configured on a per-source basis to allow the `Translator` to handle data which would otherwise be difficult to
+process. The interface is generic and may be extended for arbitrary tasks.
+
+There is a commented-out `[transform.'<source>']` block at the end of
+[main.toml](src/{{cookiecutter.namespace}}/id_translation/config/main.toml) to start from. Any number of transformers
+may be declared per source -- they run in declaration order, with the fetching files running before `main.toml`. For
+transformers that depend on the source names (say, one for every source ending in `_bitmask`), register them in code
+in [`create_translator()`](src/{{cookiecutter.namespace}}/id_translation/_initialize.py) instead; see
+[Programmatic transformer registration].
 
 [BitmaskTransformer]: https://id-translation.readthedocs.io/en/stable/api/id_translation.transform.html#id_translation.transform.BitmaskTransformer
+[Programmatic transformer registration]: https://id-translation.readthedocs.io/en/stable/documentation/translator-config.html#programmatic-transformer-registration
+
+### Caching
+Two unrelated things are called "caching" here; pick the one you need.
+
+**Whole-translator caching** is already wired up. The `load_cached_translator()` function keeps a ready-made
+`Translator` on disk under `TRANSLATOR_CACHE_DIR` (see
+[config.py](src/{{cookiecutter.namespace}}/id_translation/config.py)) and reuses it across processes until it exceeds
+`max_age`. If you know which IDs you need in advance, `Translator.go_offline()` fetches them once and disconnects.
+Between them these cover most needs, and neither requires you to write any code.
+
+**Per-source fetcher caching** is the escape hatch below those. `id-translation` ships no `CacheAccess`
+implementations -- you write one against the [CacheAccess] interface and point a fetching config at it:
+
+```toml
+[fetching.cache.'{{cookiecutter.namespace}}.id_translation.customization.MyCacheAccess']
+some_argument = "forwarded to __init__"
+```
+
+Reach for this only when you need per-source control over what is cached and for how long. See
+[Choosing a cache] for the trade-offs, and [Implementing `CacheAccess`] to get started.
+
+[CacheAccess]: https://id-translation.readthedocs.io/en/stable/api/id_translation.fetching.html#id_translation.fetching.CacheAccess
+[Choosing a cache]: https://id-translation.readthedocs.io/en/stable/documentation/translator-config.html#choosing-a-cache
+[Implementing `CacheAccess`]: https://id-translation.readthedocs.io/en/stable/documentation/translator-config.html#implementing-cacheaccess
 
 # Need help?
 This section contains links to **ID Translation** project documentation. If nothing else works, you can always ask a

@@ -1,4 +1,4 @@
-{%- if 'bci-id-translation' == cookiecutter.project_slug %}
+{%- if cookiecutter.__is_demo %}
 
 .. note::
 
@@ -17,7 +17,7 @@ Translation of IDs found in **{{cookiecutter.organization}}** databases.
    See docs for the backing API for additional help:  https://id-translation.readthedocs.io/
 
 This documentation was generated from the https://github.com/rsundqvist/id-translation-project template on
-`{{ cookiecutter.__generation_date }}`, a cookiecutter template template for the
+`{{ cookiecutter.__generation_date }}`, a cookiecutter template for the
 https://github.com/rsundqvist/id-translation package suite.
 
 Example
