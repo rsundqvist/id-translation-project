@@ -1,4 +1,4 @@
 #!/bin/bash
 set -Eeuo pipefail
 
-exec python "$(dirname "$0")/lint.py"
+exec python "$(dirname "$0")/lint.py" "$@"
