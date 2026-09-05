@@ -27,11 +27,14 @@ def test_create(tmpdir):
 
     result = subprocess.run(
         [
-            "cookiecutter", Path(__file__).parent.parent,
-            "--replay-file", replay_file,
-            "--output-dir", tmpdir,
+            "cookiecutter",
+            Path(__file__).parent.parent,
+            "--replay-file",
+            replay_file,
+            "--output-dir",
+            tmpdir,
         ],
-        stderr=subprocess.STDOUT
+        stderr=subprocess.STDOUT,
     )
     assert result.returncode == 0  # Cookiecutter returns 0 on failure :(
     assert tmpdir.joinpath(GENERATED_PROJECT_SLUG, "README.md").exists()
