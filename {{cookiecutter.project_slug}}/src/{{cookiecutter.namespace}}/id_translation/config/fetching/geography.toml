@@ -70,8 +70,9 @@ for_value = "name"  # Required since {name} is not in the fstring
 function = "like_database_table"
 
 # ------------------------------------------------------------------------------
-# For mappings that are difficult or impossible to resolve using scoring logic.
+# Manual wanted-to-actual placeholder mapping. Use for mappings that are
+# difficult or impossible to resolve using scoring logic.
 [fetching.mapping.overrides]  # Shared overrides used for all tables
-actual_column = "wanted_placeholder"
+wanted_placeholder = "actual_column"
 [fetching.mapping.overrides.table_name]  # Overrides for 'table_name' only.
-actual_column_in_table_name = "wanted_placeholder"
+wanted_placeholder = "actual_column_in_table_name"

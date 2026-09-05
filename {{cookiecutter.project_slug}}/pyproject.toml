@@ -14,7 +14,7 @@ dependencies = [
 
 
 [project.entry-points."id_translation.dio"]
-# See https://id-translation.readthedocs.io/en/stable/api/id_translation.dio.html#user-defined-integrations
+# See https://id-translation.readthedocs.io/en/stable/documentation/translation-io.html#user-defined-integrations
 # name_doesnt_matter = "{{cookiecutter.namespace}}.id_translation.submodule:MyDataStructureIO"
 
 
@@ -25,7 +25,7 @@ test = [
     "ruff~=0.15.5",
     # Demo dependencies
     "pg8000 ~= 1.31.5"  # src/{{cookiecutter.namespace}}/id_translation/config/fetching/dvd-rental-store.toml
-    # s3fs = "~2025.9.0"  # src/{{cookiecutter.namespace}}/id_translation/config/fetching/inactive/csv-files-in-s3.toml
+    # "s3fs ~= 2025.9.0",  # src/{{cookiecutter.namespace}}/id_translation/config/fetching/inactive/csv-files-in-s3.toml
 ]
 docs = [
     "sphinx~=8.2.3",
@@ -38,6 +38,8 @@ types = [
     "types-openpyxl",
     "types-python-dateutil",
     "types-xlrd",
+    "types-Pygments",
+    "types-pexpect",
 ]
 
 [tool.uv]
@@ -48,6 +50,7 @@ module-name = "{{cookiecutter.namespace}}.id_translation"
 
 [tool.pytest.ini_options]
 filterwarnings = []
+markers = ["no_database: does not need the Sakila test container (see tests/conftest.py)"]
 log_file_level = 10
 log_level = 10
 log_file = "pytest.log"
@@ -60,10 +63,12 @@ fix = true
 max-line-length = 150
 
 [tool.mypy]
-install_types = true
+# Stub packages are declared in the 'types' group rather than installed by mypy:
+# 'install_types' shells out to pip, which a uv-created venv does not have, and it
+# prompts on stdin unless 'non_interactive' is also set.
 check_untyped_defs = true
 always_true = ["ID_TRANSLATION_PANDAS_IS_TYPED"]
 
 [build-system]
-requires = ["uv_build>=0.10.9,<0.11.0"]
+requires = ["uv_build>=0.10.9,<0.12.0"]
 build-backend = "uv_build"
