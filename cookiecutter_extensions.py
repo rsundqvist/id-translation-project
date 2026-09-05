@@ -1,32 +1,51 @@
-from cookiecutter.utils import simple_filter
+import keyword
 import re
+import sys
+import unicodedata
+
+from cookiecutter.utils import simple_filter
+
+_DIGIT_WORDS = "zero one two three four five six seven eight nine".split()
 
 
 @simple_filter
 def to_namespace(s: str) -> str:
+    """Derive an importable Python package name from an organization name."""
+    original = s
+
+    # Strip accents; 'Ölands Bank AB' must not yield a non-ASCII package name.
+    s = unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode("ascii")
     s = s.lower()
-    s = re.sub(r"\s+", "_", s)
-    s = "".join(filter(str.isidentifier, s))
-    s = digit_to_word(s[0]) + s[1:]
+    # Collapse runs of unsupported characters instead of dropping them one by one:
+    # filtering per character also deletes digits, mangling names like '3M Company'.
+    s = re.sub(r"[^a-z0-9]+", "_", s).strip("_")
+
+    if not s:
+        raise ValueError(f"Cannot derive a namespace from organization={original!r}.")
+
+    if s[0].isdigit():
+        s = digit_to_word(s[0]) + s[1:]
+    if keyword.iskeyword(s) or s in sys.stdlib_module_names:
+        # 'class' is an identifier but not an importable name, and a package called
+        # 'signal' or 'email' loses to the stdlib on sys.path -- it installs, then
+        # never imports.
+        s += "_"
+
+    if not s.isidentifier():  # Defensive; the substitutions above should guarantee it.
+        raise ValueError(f"Derived namespace={s!r} from organization={original!r} is not an identifier.")
 
     return s
 
 
 @simple_filter
 def to_slug_prefix(s: str) -> str:
-    return "".join(s[0] for s in s.split("_")) if "_" in s else s
+    """Abbreviate a namespace to its initials, e.g. 'big_corporation_inc' -> 'bci'."""
+    parts = [part for part in s.split("_") if part]
+    return "".join(part[0] for part in parts) if len(parts) > 1 else s
 
 
 def digit_to_word(s: str) -> str:
-    m = {
-        0: "zero", 1: "one", 2: "two", 3: "three", 4: "four",
-        5: "five", 6: "six", 7: "seven", 8: "eight", 9: "nine",
-    }
-
     def f(c: str) -> str:
-        try:
-            return m[int(c)]
-        except ValueError:
-            return c
+        return _DIGIT_WORDS[int(c)] if c.isdigit() else c
 
     return "".join(map(f, s))
