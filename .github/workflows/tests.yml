@@ -48,7 +48,7 @@ jobs:
 
       - name: Lint
         shell: bash
-        run: uv run dev/lint.sh
+        run: uv run inv lint  # Runs ruff over this repo's own Python, then dev/lint.sh.
 
       - name: Run tests
         shell: bash
