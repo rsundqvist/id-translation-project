@@ -1,5 +1,5 @@
 .idea/
-demo/bci-id-translation/poetry.lock
+demo/bci-id-translation/uv.lock
 tmp/
 
 # Created by https://www.toptal.com/developers/gitignore/api/python

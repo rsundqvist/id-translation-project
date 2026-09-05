@@ -8,9 +8,10 @@ readme = "README.md"
 
 [dependency-groups]
 dev = [
-    "pytest~=9.0.2",
-    "ruff~=0.15.5",
+    "pytest~=9.1.1",
+    "ruff~=0.15.20",
     "cookiecutter~=2.7.1",
+    "invoke~=3.0.3",
 ]
 
 [tool.ruff]
@@ -25,5 +26,5 @@ package = false
 default-groups = "all"
 
 [build-system]
-requires = ["uv_build>=0.10.9,<0.11.0"]
+requires = ["uv_build>=0.10.9,<0.12.0"]
 build-backend = "uv_build"
