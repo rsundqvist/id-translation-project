@@ -8,7 +8,7 @@ import {{cookiecutter.namespace}}.id_translation
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 project = "{{cookiecutter.project_slug}}"
-copyright = "{{cookiecutter.organization}}, {% now 'local', '%Y' %}"
+copyright = "{{cookiecutter.organization}}, {{ cookiecutter.__generation_date.split(' ') | last }}"
 author = "{{cookiecutter.full_name}}"
 
 # -- General configuration ---------------------------------------------------
