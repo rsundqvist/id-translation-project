@@ -1,0 +1,16 @@
+﻿
+Customization
+=============
+
+``big_corporation_inc.id_translation.customization``
+
+.. automodule:: big_corporation_inc.id_translation.customization
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      CustomSqlFetcher
+      CustomTranslator
+   
