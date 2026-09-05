@@ -20,15 +20,16 @@ Sample output available on GitHub.
 * 📚 **Generated documentation**: https://rsundqvist.github.io/id-translation-project/
 
 # Quickstart
+Uses [cookiecutter](https://pypi.org/project/cookiecutter/) to generate the project (directly or through `uvx`).
+
 You will need...
-* [cookiecutter](https://pypi.org/project/cookiecutter/) to generate the project,
-* [Poetry](https://python-poetry.org/docs/#installing-with-the-official-installer) to install the project, and
+* [uv](https://docs.astral.sh/uv/getting-started/installation/) to install the project, and
 * [Docker](https://www.docker.com/products/docker-desktop/) to run the included tests.
 
-Everything else should be installed for when running `poetry install`. Steps:
-1. Generate project
+Everything else will be installed when you run `uv sync`. Steps:
+1. Generate project (`uvx`)
    ```bash
-   cookiecutter https://github.com/rsundqvist/id-translation-project.git
+   uvx cookiecutter https://github.com/rsundqvist/id-translation-project.git
    ```
 2. Start test database (separate window)
    ```bash
@@ -40,17 +41,19 @@ Everything else should be installed for when running `poetry install`. Steps:
    ./setup-and-verify.sh
    ```
 
-The `setup-and-generate.sh` script will:
-1. Lint the generated project (`ruff`)
-2. Run the included unit tests against the test database (`pytest`).
-3. Run static type checking (`mypy`).
-4. Generate documentation for the new project (`sphinx`).
+The `setup-and-verify.sh` script will:
+1. Install the project and its dependencies (`uv lock`, `uv sync`).
+2. Format the generated project (`ruff format`).
+3. Run the included unit tests against the test database (`pytest`).
+4. Lint the generated project (`ruff check`).
+5. Run static type checking (`mypy`).
+6. Generate documentation for the new project (`sphinx`).
 
 ## 1. Generate the project
 
-Install the latest version of `cookiecutter`. then generate a new `id-translation` project.
+Generate a new `id-translation` project, e.g. using `uvx` (no separate `cookiecutter` install required):
 ```bash
-cookiecutter https://github.com/rsundqvist/id-translation-project.git
+uvx cookiecutter https://github.com/rsundqvist/id-translation-project.git
 ```
 Cookiecutter will ask you for a few inputs. You can use the defaults for most of them. The most important ones are
 listed below.
@@ -59,40 +62,34 @@ listed below.
 |------------------------|------------------------------------------------------------------------------------------------|
 | organization           | Base name used for generated code, as well as some flavor text, e.g. _Big Corporation Inc._    |
 | namespace              | Python namespace for the new package, e.g. `from <namespace>.id_translation import translate`. |
-| project_slug           | The name of the new project, e.g. `pip install <namespace>-id-translation`.                    |
-| id_translation_version | Version of the [id-translation](https://github.com/rsundqvist/id-translation) package.         |
+| project_slug           | The name of the new project, e.g. `pip install <project_slug>`. Derived from the namespace.    |
+| id_translation_version | A [PEP 508](https://peps.python.org/pep-0508/) version specifier for [id-translation](https://github.com/rsundqvist/id-translation), e.g. `==1.3.0` or `(>=1.3.0,<2.0.0)` -- **not** a bare version number like `1.3.0`, which produces an invalid `pyproject.toml`. |
 
 ❗ Subsequent steps will assume that **defaults were used** for all Cookiecutter prompts.
 
-## 2. Install the project development environment with Poetry
-❗ If you don't have Poetry installed, you can get it here: https://python-poetry.org/docs/#installation
+## 2. Install the project development environment with uv
+❗ If you don't have uv installed, you can get it here: https://docs.astral.sh/uv/getting-started/installation/
 
 Move into the new project dir, then install and activate the development environment
 ```bash
 cd bci-id-translation/  # <--- <project_slug>
-poetry install
-poetry shell
+uv sync
+source .venv/bin/activate
 ```
-<pre><span style="color: #4E9A06; "><b>dev@ubuntu</b></span>:<span style="color: #3465A4; "><b>/git/bci-id-translation</b></span>$ poetry install
-Creating virtualenv <span style="color: #06989A; ">bci-id-translation</span> in /git/bci-id-translation/.venv
-<span style="color: #3465A4; ">Installing dependencies from lock file</span>
-
-<b>Package operations</b>: <span style="color: #3465A4; ">18</span> installs, <span style="color: #3465A4; ">0</span> updates, <span style="color: #3465A4; ">0</span> removals
-
-  ...
-  <span style="color: #4E9A06; "><b>•</b></span> Installing <span style="color: #06989A; ">rics</span> (<span style="color: #4E9A06; ">6.1.1</span>)
-  <span style="color: #4E9A06; "><b>•</b></span> Installing <span style="color: #06989A; ">sqlalchemy</span> (<span style="color: #4E9A06; ">2.0.46</span>)
-  <span style="color: #4E9A06; "><b>•</b></span> Installing <span style="color: #06989A; ">id-translation</span> (<span style="color: #4E9A06; ">1.1.0</span>)
-  <span style="color: #4E9A06; "><b>•</b></span> Installing <span style="color: #06989A; ">pg8000</span> (<span style="color: #4E9A06; ">1.31.5</span>)
-  <span style="color: #4E9A06; "><b>•</b></span> Installing <span style="color: #06989A; ">pytest</span> (<span style="color: #4E9A06; ">8.3.5</span>)
-
-<b>Installing</b> the current project: <span style="color: #06989A; ">bci-id-translation</span> (<span style="color: #4E9A06; ">0.1.0</span>)
-<span style="color: #4E9A06; "><b>dev@ubuntu</b></span>:<span style="color: #3465A4; "><b>/git/bci-id-translation</b></span>$ poetry shell
-Spawning shell within <span style="color: #3465A4; ">/git/bci-id-translation/.venv</span>
-<span style="color: #4E9A06; "><b>dev@ubuntu</b></span>:<span style="color: #3465A4; "><b>/git/bci-id-translation</b></span>$ . /git/bci-id-translation/.venv/bin/activate
-(bci-id-translation-py3.11) <span style="color: #4E9A06; "><b>dev@ubuntu</b></span>:<span style="color: #3465A4; "><b>/git/bci-id-translation</b></span>$ 
-</pre>
-
+<pre><span style="color: #4E9A06; "><b>dev@ubuntu</b></span>:<span style="color: #3465A4; "><b>/git/bci-id-translation</b></span>$ uv sync
+<span style="color: #06989A; ">Using CPython 3.14.6</span>
+<span style="color: #06989A; ">Creating virtual environment at:</span> .venv
+<span style="color: #06989A; ">Resolved</span> <b>62 packages</b> in 11ms
+<span style="color: #06989A; ">Installed</span> <b>56 packages</b> in 138ms
+ <span style="color: #4E9A06; "><b>+</b></span> <span style="color: #06989A; ">id-translation</span>==<span style="color: #4E9A06; ">1.3.0</span>
+ <span style="color: #4E9A06; "><b>+</b></span> <span style="color: #06989A; ">pandas</span>==<span style="color: #4E9A06; ">3.0.5</span>
+ <span style="color: #4E9A06; "><b>+</b></span> <span style="color: #06989A; ">pg8000</span>==<span style="color: #4E9A06; ">1.31.5</span>
+ <span style="color: #4E9A06; "><b>+</b></span> <span style="color: #06989A; ">pytest</span>==<span style="color: #4E9A06; ">9.0.3</span>
+ <span style="color: #4E9A06; "><b>+</b></span> <span style="color: #06989A; ">rics</span>==<span style="color: #4E9A06; ">6.2.1</span>
+ <span style="color: #4E9A06; "><b>+</b></span> <span style="color: #06989A; ">sqlalchemy</span>==<span style="color: #4E9A06; ">2.0.52</span>
+ <span style="color: #3465A4; ">...</span>
+<span style="color: #4E9A06; "><b>dev@ubuntu</b></span>:<span style="color: #3465A4; "><b>/git/bci-id-translation</b></span>$ source .venv/bin/activate
+(bci-id-translation) <span style="color: #4E9A06; "><b>dev@ubuntu</b></span>:<span style="color: #3465A4; "><b>/git/bci-id-translation</b></span>$ </pre>
 ## 3. Start the test database for the template project
 The pre-configured tests are based on the `rsundqvist/sakila-preload:postgres` Docker image. From a **❗ new terminal
 window**, run
@@ -121,18 +118,18 @@ SQLAlchemy is used internally by the `SqlFetcher` fetching implementation.
 
 ## 4. Run the included tests
 ```bash
-pytest tests/test_basics.py
+pytest tests/id_translation/test_basics.py
 ```
-<pre>(bci-id-translation-py3.11) <span style="color: #4E9A06; "><b>dev@ubuntu</b></span>:<span style="color: #3465A4; "><b>/git/bci-id-translation</b></span>$ pytest tests/test_basics.py 
+<pre>(bci-id-translation) <span style="color: #4E9A06; "><b>dev@ubuntu</b></span>:<span style="color: #3465A4; "><b>/git/bci-id-translation</b></span>$ pytest tests/id_translation/test_basics.py 
 <b>====================================================================== test session starts ======================================================================</b>
-platform linux -- Python 3.11.2, pytest-7.2.2, pluggy-1.0.0
-rootdir: /git/bci-id-translation, configfile: pytest.ini
-<b>collected 6 items                                                                                                                                               </b>
+platform linux -- Python 3.14.6, pytest-9.0.3, pluggy-1.6.0
+rootdir: /git/bci-id-translation, configfile: pyproject.toml
+<b>collected 5 items                                                                                                                                               </b>
 
-tests/test_basics.py <span style="color: #4E9A06; ">......                                                                                                                               [100%]</span>
+tests/id_translation/test_basics.py <span style="color: #4E9A06; ">.....                                                                                                                                [100%]</span>
 
-<span style="color: #4E9A06; ">======================================================================= </span><span style="color: #4E9A06; "><b>6 passed</b></span><span style="color: #4E9A06; "> in 2.98s =======================================================================</span>
-(bci-id-translation-py3.11) <span style="color: #4E9A06; "><b>dev@ubuntu</b></span>:<span style="color: #3465A4; "><b>/git/bci-id-translation</b></span>$ 
+<span style="color: #4E9A06; ">======================================================================= </span><span style="color: #4E9A06; "><b>5 passed</b></span><span style="color: #4E9A06; "> in 0.95s =======================================================================</span>
+(bci-id-translation) <span style="color: #4E9A06; "><b>dev@ubuntu</b></span>:<span style="color: #3465A4; "><b>/git/bci-id-translation</b></span>$ 
 </pre>
 
 # Next steps

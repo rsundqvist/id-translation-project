@@ -8,7 +8,7 @@
 ########################################################################################################################
 [translator]
 fmt = "{id}:{name}"
-enable_uuid_heuristics = false  # Enabling may improve matching especially for SQLAlchemy < 2
+enable_uuid_heuristics = false  # Enable to improve matching when UUID-like IDs are in use.
 [unknown_ids]
 fmt = "<Failed: id={id!r}>"
 
@@ -72,3 +72,27 @@ strange_name = "table-to-use"
 max_workers = 2
 on_source_conflict = "raise"
 fetcher_discarded_log_level = "INFO"
+
+########################################################################################################################
+# Transformations.
+#
+# Transformers handle composite values -- bitmasks, flag enums -- that the
+# Translator cannot process on its own. Declare them per source; keys in the
+# subsection are passed to the transformer's __init__.
+#
+# Any number of transformers may be declared per source. They run in declaration
+# order, with auxiliary fetching files running before this one.
+#
+# https://id-translation.readthedocs.io/en/stable/documentation/translator-config.html#section-transformations
+#
+# Uncomment and replace '<source>' with a real source name. A transform declared
+# for a source that does not exist is ignored, with a warning.
+#
+# [transform.'<source>'.BitmaskTransformer]
+# joiner = " AND "
+# overrides = [
+#     { id = 0, override = "NOT_SET" },
+# ]
+
+# Transformers may also be registered in code, once the sources are known; see
+# create_translator() in _initialize.py.
