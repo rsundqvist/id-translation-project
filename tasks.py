@@ -95,6 +95,16 @@ def flake8(c: Context) -> None:
 
 
 @task
+def check_links(c: Context) -> None:
+    """Check that external links in the template still resolve, anchors included.
+
+    Kept out of 'inv lint' and CI on purpose: it needs the network, and a third-party
+    documentation outage must not be able to fail an unrelated build.
+    """
+    _run(c, "dev/lint.sh --urls")
+
+
+@task
 def template_lint(c: Context) -> None:
     """Check that no concrete (un-templatized) values leaked into the template."""
     _run(c, "dev/lint.sh")

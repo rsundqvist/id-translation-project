@@ -64,6 +64,7 @@ uv run inv format       # ruff format + --fix-only
 uv run inv generate-demo --replay-file=demo/replay.json  # regenerate demo/bci-id-translation/ (dev/generate-project.sh)
 uv run inv backport     # back-port demo edits into the template (dev/backport.py), then lint
 uv run inv demo-verify  # run the demo's own ./setup-and-verify.sh pipeline
+uv run inv check-links  # opt-in, needs network: template URLs still resolve, anchors included
 ```
 
 A generated (or the demo) project verifies itself with `./setup-and-verify.sh` (ruff → pytest → mypy → sphinx).
